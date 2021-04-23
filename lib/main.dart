@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:fuelflex/screens/second_screen.dart';
+import 'screens/LoginPage_scree.dart';
+import 'screens/thirdPage_screen.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+       
+        primarySwatch: Colors.blue,
+      ),
+      home: LoginPageScreen(),
+      routes :{
+        LoginPageScreen.routeName : (context) => LoginPageScreen(),
+        SecondScreen.routeName : (context) => SecondScreen(),
+
+      },
+      onGenerateRoute: (settings) {
+          if(settings.name == ThirdScreen.routeName){
+            return MaterialPageRoute(builder: (context)  {
+              return ThirdScreen( data : settings.arguments);
+            });
+
+            
+          }
+          return null;
+      },
+    );
+  }
+}
