@@ -3,6 +3,6 @@ class UserModel {
   final String msg;
   
 
-  UserModel(this.title, this.msg);
+  UserModel({this.title, this.msg});
 
 }

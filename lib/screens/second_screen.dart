@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuelflex/model/user_model.dart';
+import '../model/user_model.dart';
 
 class SecondScreen extends StatelessWidget {
   static const routeName = "/secondScreen";
@@ -17,11 +17,12 @@ class SecondScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).pushNamed("checkArg",
-                  arguments: UserModel("Third Screen", " Hi How are you"));
+                  arguments:
+                      UserModel(title: "Third Screen", msg: "Hi How are you"));
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.yellow[300],
-            ), 
+            ),
             child: Text(
               "Third Screen",
               style: TextStyle(color: Colors.white, fontSize: 40),

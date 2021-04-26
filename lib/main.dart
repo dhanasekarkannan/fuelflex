@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fuelflex/screens/second_screen.dart';
-import 'screens/LoginPage_scree.dart';
+import 'screens/second_screen.dart';
+import 'screens/loginPage_screen.dart';
 import 'screens/thirdPage_screen.dart';
 
 void main() {

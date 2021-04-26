@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuelflex/model/user_model.dart';
+import '../model/user_model.dart';
 
 class ThirdScreen extends StatelessWidget {
   static const routeName = "/thirdScreen";
