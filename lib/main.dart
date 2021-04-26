@@ -12,26 +12,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-       
         primarySwatch: Colors.blue,
       ),
       home: LoginPageScreen(),
-      routes :{
-        LoginPageScreen.routeName : (context) => LoginPageScreen(),
-        SecondScreen.routeName : (context) => SecondScreen(),
-
+      routes: {
+        LoginPageScreen.routeName: (context) => LoginPageScreen(),
+        SecondScreen.routeName: (context) => SecondScreen(),
       },
       onGenerateRoute: (settings) {
-          if(settings.name == ThirdScreen.routeName){
-            return MaterialPageRoute(builder: (context)  {
-              return ThirdScreen( data : settings.arguments);
-            });
-
-            
-          }
-          return null;
+        if (settings.name == ThirdScreen.routeName) {
+          return MaterialPageRoute(builder: (context) {
+            return ThirdScreen(data: settings.arguments);
+          });
+        }
+        return null;
       },
     );
   }
