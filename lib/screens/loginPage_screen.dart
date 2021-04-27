@@ -13,11 +13,17 @@ class LoginPageScreen extends StatelessWidget {
       body: Container(
         height: _size.height,
         width: _size.width,
-        color: Colors.red,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(TextStrings.appAssetLogoPath),
+          ),
+        ),
+        color: Colors.blue[900],
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Spacer(),
               Container(
                 height: _size.height * 0.20,
                 width: _size.width * 0.30,
@@ -27,13 +33,23 @@ class LoginPageScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: _size.height * 0.20,
+                height: _size.height * 0.15,
                 width: _size.width * 0.50,
                 child: MenuButtonWidget(
+                  title: TextStrings.textLogin,
                   onPressed: () {
                     Navigator.of(context).pushNamed(SecondScreen.routeName,
                         arguments: {"title": "dashboard", "msg": "flexfuel"});
                   },
+                ),
+              ),
+              Spacer(),
+              Container(
+                height: _size.height * 0.20,
+                width: _size.width * 0.30,
+                child: Image(
+                  image: AssetImage(TextStrings.appAssetLogoPath),
+                  fit: BoxFit.contain,
                 ),
               ),
             ],

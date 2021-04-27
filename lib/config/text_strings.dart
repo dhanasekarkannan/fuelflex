@@ -7,4 +7,6 @@ class TextStrings {
 
   //Text Strings
   static const textLogin = "Login";
+
+
 }
