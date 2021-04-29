@@ -16,7 +16,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     ServiceProviders().testServerRequest().then((value) {
-      value == true
+      value
+          ? ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Request Success"),
+              ),
+            )
+          : ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Request Failed"),
+              ),
+            );
+
+      value
           ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
           : ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
