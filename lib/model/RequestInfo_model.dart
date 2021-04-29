@@ -5,12 +5,12 @@ class TestRequest {
 
   TestRequest.fromJson(Map<String, dynamic> json) {
     requestInfo = json['RequestInfo'] != null
-        ? new RequestInfo.fromJson(json['RequestInfo'])
+        ? RequestInfo.fromJson(json['RequestInfo'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     if (this.requestInfo != null) {
       data['RequestInfo'] = this.requestInfo.toJson();
     }
@@ -32,7 +32,7 @@ class RequestInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['RequestType'] = this.requestType;
     data['TermSerialNum'] = this.termSerialNum;
     data['version'] = this.version;
