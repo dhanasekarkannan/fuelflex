@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/screens/second_screen.dart';
+import 'package:fuelflex/widgets/colorBackground_widget.dart';
 import 'package:fuelflex/widgets/menuButton_widget.dart';
 
 class LoginPageScreen extends StatelessWidget {
-  static const routeName = TextStrings.appLoginScreenPath;
+  static const String routeName = TextStrings.appLoginScreenPath;
 
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        height: _size.height,
-        width: _size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(TextStrings.appAssetLogoPath),
-          ),
-        ),
-        color: Colors.blue[900],
+      body: ColorBackgroundWidget(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -26,14 +19,16 @@ class LoginPageScreen extends StatelessWidget {
               Spacer(),
               Container(
                 height: _size.height * 0.20,
-                width: _size.width * 0.30,
+                width: _size.width * 0.50,
                 child: Image(
-                  image: AssetImage(TextStrings.appAssetLogoPath),
+                  image: AssetImage(
+                    TextStrings.appAssetLogoPath,
+                  ),
                   fit: BoxFit.contain,
                 ),
               ),
               Container(
-                height: _size.height * 0.15,
+                padding: EdgeInsets.only(top: 10),
                 width: _size.width * 0.50,
                 child: MenuButtonWidget(
                   title: TextStrings.textLogin,
@@ -45,10 +40,10 @@ class LoginPageScreen extends StatelessWidget {
               ),
               Spacer(),
               Container(
-                height: _size.height * 0.20,
-                width: _size.width * 0.30,
+                height: _size.width * 0.25,
+                width: _size.width * 0.25,
                 child: Image(
-                  image: AssetImage(TextStrings.appAssetLogoPath),
+                  image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
                   fit: BoxFit.contain,
                 ),
               ),

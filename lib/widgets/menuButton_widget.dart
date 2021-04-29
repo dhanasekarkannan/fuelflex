@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-class MenuButtonWidget extends StatelessWidget {
+class MenuButtonWidget extends ElevatedButton {
   final String title;
-  final Function onPressed;
+  final VoidCallback onPressed;
 
-  MenuButtonWidget({Key key, this.title, this.onPressed}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            primary: Colors.yellow[300],
-            textStyle: TextStyle(color: Colors.pink, fontSize: 40)
+  MenuButtonWidget({this.title, this.onPressed})
+      : super(
+          child: Text(
+            title.toUpperCase(),
+            style: TextStyle(
+              color: Colors.white,
             ),
-        child: Text(
-          title,
-          style: TextStyle(color: Colors.pink),
-        ),
-        onPressed: onPressed,
-      ),
-    );
-  }
+          ),
+          style: ElevatedButton.styleFrom(
+              primary: Colors.orange[400],
+              padding: EdgeInsets.all(20),
+              textStyle: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.5)),
+          onPressed: onPressed,
+        );
 }
