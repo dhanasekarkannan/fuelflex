@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fuelflex/screens/MainPage_screen.dart';
+import 'package:fuelflex/screens/insertCardPage_screen.dart';
+import 'package:fuelflex/screens/saleMenuPage_screen.dart';
 import 'package:fuelflex/screens/splash_screen.dart';
-import 'package:fuelflex/screens/tapTapPage_screen.dart';
-import 'screens/second_screen.dart';
+import 'package:fuelflex/screens/tagTapPage_screen.dart';
 import 'screens/loginPage_screen.dart';
-import 'screens/thirdPage_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
@@ -23,14 +26,16 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => SplashScreen(),
         LoginPageScreen.routeName: (context) => LoginPageScreen(),
         MainPageScreen.routeName: (context) => MainPageScreen(),
-        TapTagPageScreen.routeName: (context) => TapTagPageScreen(),
+        TagTapPageScreen.routeName: (context) => TagTapPageScreen(),
+        SaleMenuPageScreen.routeName: (context) => SaleMenuPageScreen(),
+        InsertCardPageScreen.routeName: (context) => InsertCardPageScreen(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == ThirdScreen.routeName) {
-          return MaterialPageRoute(builder: (context) {
-            // return ThirdScreen(data: settings.arguments);
-          });
-        }
+        // if (settings.name == ThirdScreen.routeName) {
+        //   return MaterialPageRoute(builder: (context) {
+        //     // return ThirdScreen(data: settings.arguments);
+        //   });
+        // }
         return null;
       },
     );

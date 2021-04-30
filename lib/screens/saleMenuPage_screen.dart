@@ -5,12 +5,11 @@ import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/subMenuButton_widget.dart';
 
-class MainPageScreen extends StatelessWidget {
-  static const String routeName = TextStrings.appMainScreenPath;
+class SaleMenuPageScreen extends StatelessWidget {
+  static const String routeName = TextStrings.appSaleScreenPath;
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: BackgroundWidget(
         imagePath: TextStrings.appAssetBackgroundPlainPath,
@@ -18,19 +17,21 @@ class MainPageScreen extends StatelessWidget {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Flexible(
-              child: Container(
-                height: _size.height * 0.20,
-                width: _size.width * 0.50,
-                child: Image(
-                  image: AssetImage(
-                    TextStrings.appAssetOlaCardColorLogoPath,
-                  ),
-                  fit: BoxFit.contain,
+            Container(
+              padding: EdgeInsets.only(top: 50),
+              height: _size.height * 0.20,
+              width: _size.width * 0.50,
+              child: Image(
+                image: AssetImage(
+                  TextStrings.appAssetOlaCardColorLogoPath,
                 ),
+                fit: BoxFit.contain,
               ),
             ),
-            Expanded(
+            SizedBox(
+              height: _size.height * 0.25,
+            ),
+            Flexible(
               child: Container(
                 width: _size.width * 0.75,
                 child: ListView.builder(
@@ -59,9 +60,8 @@ class MainPageScreen extends StatelessWidget {
 
 class MenuItems {
   List<Map<String, dynamic>> _menuItems = [
-    {"title": "CSA", "onPressed": TextStrings.appTagTapScreenPath},
-    {"title": "Manager", "onPressed": TextStrings.appTagTapScreenPath},
-    {"title": "Dealer", "onPressed": TextStrings.appTagTapScreenPath},
+    {"title": "Sale", "onPressed": TextStrings.appInsertCardScreenPath},
+    {"title": "Others", "onPressed": TextStrings.appInsertCardScreenPath},
   ];
 
   UnmodifiableListView<Map<String, dynamic>> get menuItems =>

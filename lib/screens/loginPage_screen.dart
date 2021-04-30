@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/screens/MainPage_screen.dart';
-import 'package:fuelflex/screens/second_screen.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/menuButton_widget.dart';
-import 'package:fuelflex/widgets/subMenuButton_widget.dart';
 
 class LoginPageScreen extends StatelessWidget {
   static const String routeName = TextStrings.appLoginScreenPath;
@@ -34,7 +32,7 @@ class LoginPageScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10),
                 width: _size.width * 0.50,
                 child: MenuButtonWidget(
-                  title: TextStrings.textLogin,
+                  title: TextStrings.loginText,
                   onPressed: () {
                     Navigator.of(context).pushNamed(MainPageScreen.routeName);
                   },
