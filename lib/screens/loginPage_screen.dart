@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/screens/MainPage_screen.dart';
 import 'package:fuelflex/screens/second_screen.dart';
-import 'package:fuelflex/widgets/colorBackground_widget.dart';
+import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/menuButton_widget.dart';
+import 'package:fuelflex/widgets/subMenuButton_widget.dart';
 
 class LoginPageScreen extends StatelessWidget {
   static const String routeName = TextStrings.appLoginScreenPath;
@@ -11,7 +13,8 @@ class LoginPageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
-      body: ColorBackgroundWidget(
+      body: BackgroundWidget(
+        imagePath: TextStrings.appAssetBackgroundColorPath,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -22,7 +25,7 @@ class LoginPageScreen extends StatelessWidget {
                 width: _size.width * 0.50,
                 child: Image(
                   image: AssetImage(
-                    TextStrings.appAssetLogoPath,
+                    TextStrings.appAssetOlaCardPlainLogoPath,
                   ),
                   fit: BoxFit.contain,
                 ),
@@ -33,8 +36,7 @@ class LoginPageScreen extends StatelessWidget {
                 child: MenuButtonWidget(
                   title: TextStrings.textLogin,
                   onPressed: () {
-                    Navigator.of(context).pushNamed(SecondScreen.routeName,
-                        arguments: {"title": "dashboard", "msg": "flexfuel"});
+                    Navigator.of(context).pushNamed(MainPageScreen.routeName);
                   },
                 ),
               ),

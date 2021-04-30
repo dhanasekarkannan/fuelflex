@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MenuButtonWidget extends ElevatedButton {
+class SubMenuButtonWidget extends ElevatedButton {
   final String title;
   final VoidCallback onPressed;
 
-  MenuButtonWidget({this.title, this.onPressed})
+  SubMenuButtonWidget({this.title, this.onPressed})
       : super(
           child: Text(
             title.toUpperCase(),
@@ -13,10 +13,12 @@ class MenuButtonWidget extends ElevatedButton {
             ),
           ),
           style: ElevatedButton.styleFrom(
-              primary: Colors.orange[400],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              primary: Colors.indigo[900],
               padding: EdgeInsets.all(20),
               textStyle: TextStyle(
-                  fontSize: 30,
+                  fontSize: 25,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.5)),
           onPressed: onPressed,

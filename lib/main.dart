@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fuelflex/screens/MainPage_screen.dart';
 import 'package:fuelflex/screens/splash_screen.dart';
+import 'package:fuelflex/screens/tapTapPage_screen.dart';
 import 'screens/second_screen.dart';
 import 'screens/loginPage_screen.dart';
 import 'screens/thirdPage_screen.dart';
@@ -18,9 +20,10 @@ class MyApp extends StatelessWidget {
       ),
       home: SplashScreen(),
       routes: {
-        SecondScreen.routeName: (context) => SecondScreen(),
         SplashScreen.routeName: (context) => SplashScreen(),
         LoginPageScreen.routeName: (context) => LoginPageScreen(),
+        MainPageScreen.routeName: (context) => MainPageScreen(),
+        TapTagPageScreen.routeName: (context) => TapTagPageScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == ThirdScreen.routeName) {

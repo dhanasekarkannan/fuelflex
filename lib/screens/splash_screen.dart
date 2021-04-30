@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/providers/service_providers.dart';
-import 'package:fuelflex/widgets/colorBackground_widget.dart';
+import 'package:fuelflex/widgets/Background_widget.dart';
 import 'loginPage_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,7 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
-    return ColorBackgroundWidget(
+    return BackgroundWidget(
+      imagePath: TextStrings.appAssetBackgroundColorPath,
       child: Center(
         child: Container(
             height: _size.width * 0.30,

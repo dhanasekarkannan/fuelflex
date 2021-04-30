@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fuelflex/config/text_strings.dart';
-import 'package:fuelflex/model/RequestInfo_model.dart';
+import 'package:fuelflex/model/requestInfo_model.dart';
 import 'package:http/http.dart' as http;
 
 class ServiceProviders {

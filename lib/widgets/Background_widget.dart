@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fuelflex/config/text_strings.dart';
 
-class ColorBackgroundWidget extends StatelessWidget {
+class BackgroundWidget extends StatelessWidget {
   final Widget child;
+  final String imagePath;
 
-  const ColorBackgroundWidget({Key key, this.child}) : super(key: key);
+  const BackgroundWidget({
+    Key key,
+    this.child,
+    this.imagePath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class ColorBackgroundWidget extends StatelessWidget {
       width: _size.width,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(TextStrings.appAssetBackgroundColorPath),
+          image: AssetImage(imagePath),
           fit: BoxFit.cover,
         ),
       ),
