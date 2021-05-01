@@ -1,21 +1,29 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/model/masterKeyInfo_model.dart';
+import 'package:fuelflex/model/reqInfo_model.dart';
 import 'package:fuelflex/model/requestInfo_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-class ServiceProviders {
+class ServiceProviders with ChangeNotifier {
+  MasterKeyInfo _masterKeyInfo;
+
+  MasterKeyInfo get masterKeyInfo => _masterKeyInfo;
+
   static Uri _url = Uri.parse(TextStrings.serviceURL);
 
-  TestRequest _requestInfo = TestRequest(
-      requestInfo: RequestInfo(
-          requestType: "MasterKeyInfo",
-          version: "V_1.1.2",
-          termSerialNum: "0821642298"));
+  ReqInfo _requestInfo = ReqInfo(
+    requestInfo: RequestInfo(
+      requestType: "MasterKeyInfo",
+      termSerialNum: "0821642298",
+      version: "V_1.1.2",
+    ),
+  );
 
-  TestRequest get requestInfo => _requestInfo;
-
-  
+  ReqInfo get requestInfo => _requestInfo;
 
   Future<bool> testServerRequest() async {
     try {
@@ -25,10 +33,11 @@ class ServiceProviders {
             body: jsonEncode(requestInfo),
           )
           .timeout(Duration(seconds: 10));
-      print(response.statusCode);
-      print(response.body);
-      Map<String, dynamic> test = {...jsonDecode(response.body)};
-      print("${jsonEncode(test)}");
+
+      _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
+              notifyListeners();
+
+      print("${jsonEncode(masterKeyInfo.merchantInfo.merchantName)}");
 
       return true;
     } catch (e) {
