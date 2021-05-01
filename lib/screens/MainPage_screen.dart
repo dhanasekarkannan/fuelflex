@@ -60,7 +60,7 @@ class MainPageScreen extends StatelessWidget {
 class MenuItems {
   List<Map<String, dynamic>> _menuItems = [
     {"title": "CSA", "onPressed": TextStrings.appTagTapScreenPath},
-    {"title": "Manager", "onPressed": TextStrings.appTagTapScreenPath},
+    {"title": "Manager", "onPressed": TextStrings.appSaleScreenPath},
     {"title": "Dealer", "onPressed": TextStrings.appTagTapScreenPath},
   ];
 

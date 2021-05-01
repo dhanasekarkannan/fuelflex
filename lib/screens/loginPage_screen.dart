@@ -40,7 +40,7 @@ class LoginPageScreen extends StatelessWidget {
                   },
                 ),
               ),
-              Text(ServiceProviders().masterKeyInfo.merchantInfo.merchantName),
+              // Text(ServiceProviders().masterKeyInfo.merchantInfo.merchantName),
               Spacer(),
               Container(
                 height: _size.width * 0.25,

@@ -21,6 +21,7 @@ class SubMenuButtonWidget extends ElevatedButton {
                   fontSize: 25,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.5)),
+                  
           onPressed: onPressed,
         );
 }

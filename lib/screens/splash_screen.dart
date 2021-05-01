@@ -14,30 +14,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-     MasterKeyInfo _masterKeyInfo = ServiceProviders().masterKeyInfo;
+  //  MasterKeyInfo _masterKeyInfo = ServiceProviders().masterKeyInfo;
+  //
+  bool _loading = true;
 
   @override
   void initState() {
     super.initState();
-    ServiceProviders().testServerRequest().then((value) {
 
-      _masterKeyInfo = ServiceProviders().masterKeyInfo;
+    ServiceProviders().testServerRequest().then((value) {
       value
-          ? ScaffoldMessenger.of(context).showSnackBar(
-              // Consumer<ServiceProviders>(
-              //   builder: (_,service, child ) {
-              //     return SnackBar(
-              //     content: Text("Request Success ${service.masterKeyInfo.merchantInfo.merchantName}"),
-                
-              //   );
-              //   }
-              // ) as SnackBar,
-              // 
-              SnackBar(
-                  content: Text("Request Success ${Provider.of<ServiceProviders>(context, listen : false).masterKeyInfo}"),
-                
-                )
-            )
+          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Request Success  "),
+            ))
           : ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text("Request Failed"),
@@ -51,6 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 content: Text("Request Failed"),
               ),
             );
+
+      setState(() {
+        _loading = false;
+      });
     }).catchError((e) {
       print(e);
     });
@@ -62,11 +55,18 @@ class _SplashScreenState extends State<SplashScreen> {
     return BackgroundWidget(
       imagePath: TextStrings.appAssetBackgroundColorPath,
       child: Center(
-        child: Container(
-            height: _size.width * 0.30,
-            width: _size.width * 0.30,
-            child:
-                Image(image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath))),
+        child: Column(
+          children: [
+            Container(
+              height: _size.width * 0.30,
+              width: _size.width * 0.30,
+              child: Image(
+                image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
+              ),
+            ),
+            _loading ? CircularProgressIndicator() : Container(),
+          ],
+        ),
       ),
     );
   }

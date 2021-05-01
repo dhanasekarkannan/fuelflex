@@ -8,7 +8,7 @@ import 'package:fuelflex/model/requestInfo_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class ServiceProviders with ChangeNotifier {
+class ServiceProviders {
   MasterKeyInfo _masterKeyInfo;
 
   MasterKeyInfo get masterKeyInfo => _masterKeyInfo;
@@ -28,15 +28,14 @@ class ServiceProviders with ChangeNotifier {
   Future<bool> testServerRequest() async {
     try {
       http.Response response = await http
-          .post(
-            _url,
-            body: jsonEncode(requestInfo),
-          )
+          .post(_url, body: jsonEncode(requestInfo))
           .timeout(Duration(seconds: 10));
 
       _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
-              notifyListeners();
 
+ print("${jsonEncode(masterKeyInfo)}");
+
+  print("______%%%%%_______");
       print("${jsonEncode(masterKeyInfo.merchantInfo.merchantName)}");
 
       return true;
@@ -46,3 +45,4 @@ class ServiceProviders with ChangeNotifier {
     }
   }
 }
+
