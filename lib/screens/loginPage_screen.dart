@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/model/masterKeyInfo_model.dart';
@@ -5,6 +7,7 @@ import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/screens/MainPage_screen.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/menuButton_widget.dart';
+import 'package:provider/provider.dart';
 
 class LoginPageScreen extends StatelessWidget {
   static const String routeName = TextStrings.appLoginScreenPath;
@@ -40,7 +43,7 @@ class LoginPageScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // Text(ServiceProviders().masterKeyInfo.merchantInfo.merchantName),
+              Text(Provider.of<ServiceProviders>(context).masterKeyInfo.merchantInfo.merchantName),
               Spacer(),
               Container(
                 height: _size.width * 0.25,

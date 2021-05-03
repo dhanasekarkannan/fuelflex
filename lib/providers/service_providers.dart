@@ -6,12 +6,12 @@ import 'package:fuelflex/model/masterKeyInfo_model.dart';
 import 'package:fuelflex/model/reqInfo_model.dart';
 import 'package:fuelflex/model/requestInfo_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
-class ServiceProviders {
+class ServiceProviders with ChangeNotifier {
   MasterKeyInfo _masterKeyInfo;
-
+  String _testMsg = "hellow";
   MasterKeyInfo get masterKeyInfo => _masterKeyInfo;
+  String get testMsg => _testMsg;
 
   static Uri _url = Uri.parse(TextStrings.serviceURL);
 
@@ -30,14 +30,15 @@ class ServiceProviders {
       http.Response response = await http
           .post(_url, body: jsonEncode(requestInfo))
           .timeout(Duration(seconds: 10));
-
+        
       _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
 
- print("${jsonEncode(masterKeyInfo)}");
+      print("${jsonEncode(masterKeyInfo)}");
 
-  print("______%%%%%_______");
+      print("______%%%%%_______");
       print("${jsonEncode(masterKeyInfo.merchantInfo.merchantName)}");
-
+      _testMsg = masterKeyInfo.merchantInfo.merchantName;
+      notifyListeners();
       return true;
     } catch (e) {
       print(e);
@@ -45,4 +46,3 @@ class ServiceProviders {
     }
   }
 }
-

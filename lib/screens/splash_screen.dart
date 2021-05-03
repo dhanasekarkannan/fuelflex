@@ -14,15 +14,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  //  MasterKeyInfo _masterKeyInfo = ServiceProviders().masterKeyInfo;
   //
   bool _loading = true;
 
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
-    ServiceProviders().testServerRequest().then((value) {
+  void serviceCall() {
+    Provider.of<ServiceProviders>(context).testServerRequest().then((value) {
       value
           ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text("Request Success  "),
@@ -33,13 +35,15 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
 
-      value
-          ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
-          : ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Request Failed"),
-              ),
-            );
+      Future.delayed(Duration(seconds: 3), () {
+        value
+            ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
+            : ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Request Failed"),
+                ),
+              );
+      });
 
       setState(() {
         _loading = false;
@@ -50,8 +54,23 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_loading) {
+      serviceCall();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
+
     return BackgroundWidget(
       imagePath: TextStrings.appAssetBackgroundColorPath,
       child: Center(
@@ -64,7 +83,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
               ),
             ),
-            _loading ? CircularProgressIndicator() : Container(),
+            _loading
+                ? CircularProgressIndicator()
+                : Container(
+                    child: Text(Provider.of<ServiceProviders>(context)
+                        .masterKeyInfo
+                        .merchantInfo
+                        .middleName),
+                  ),
           ],
         ),
       ),
