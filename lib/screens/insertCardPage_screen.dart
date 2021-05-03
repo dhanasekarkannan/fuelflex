@@ -19,7 +19,6 @@ class _InsertCardPageScreenState extends State<InsertCardPageScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _navigateToSale();
   }

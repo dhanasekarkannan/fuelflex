@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
@@ -23,7 +24,15 @@ class ServiceProviders with ChangeNotifier {
     ),
   );
 
+
   ReqInfo get requestInfo => _requestInfo;
+
+
+  void setTest( String key ){
+    _testMsg = key;
+    // _masterKeyInfo.merchantInfo.merchantName = key ;
+  notifyListeners();
+  }
 
   Future<bool> testServerRequest() async {
     try {
@@ -33,15 +42,21 @@ class ServiceProviders with ChangeNotifier {
         
       _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
 
-      print("${jsonEncode(masterKeyInfo)}");
+      // print("${jsonEncode(masterKeyInfo)}");
 
-      print("______%%%%%_______");
+      // print("______%%%%%_______");
       print("${jsonEncode(masterKeyInfo.merchantInfo.merchantName)}");
-      _testMsg = masterKeyInfo.merchantInfo.merchantName;
+      // _testMsg = masterKeyInfo.merchantInfo.merchantName;
       notifyListeners();
       return true;
+    } on SocketException catch (e) {
+      print(" SocketException ${e.message}");
+      return false;
+    } on HttpException catch (e) {
+      print(" SocketException ${e.message}");
+      return false;
     } catch (e) {
-      print(e);
+      print(" default exception ${e.message}");
       return false;
     }
   }

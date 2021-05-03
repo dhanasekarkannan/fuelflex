@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
-import 'package:fuelflex/model/masterKeyInfo_model.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/screens/MainPage_screen.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
@@ -37,13 +35,14 @@ class LoginPageScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10),
                 width: _size.width * 0.50,
                 child: MenuButtonWidget(
-                  title: TextStrings.loginText,
+                  // title: TextStrings.loginText,
+                  title : Provider.of<ServiceProviders>(context).testMsg,
                   onPressed: () {
                     Navigator.of(context).pushNamed(MainPageScreen.routeName);
                   },
                 ),
               ),
-              Text(Provider.of<ServiceProviders>(context).masterKeyInfo.merchantInfo.merchantName),
+              
               Spacer(),
               Container(
                 height: _size.width * 0.25,

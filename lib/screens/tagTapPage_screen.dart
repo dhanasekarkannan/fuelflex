@@ -11,21 +11,18 @@ class TagTapPageScreen extends StatefulWidget {
 }
 
 class _TagTapPageScreenState extends State<TagTapPageScreen> {
-  
-  void _navigateToSale() async{
-    await Future.delayed(Duration(seconds: 3), (){
+  void _navigateToSale() async {
+    await Future.delayed(Duration(seconds: 3), () {
       Navigator.of(context).pushNamed(TextStrings.appSaleScreenPath);
     });
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _navigateToSale();
   }
-  
 
-  
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -35,7 +32,7 @@ class _TagTapPageScreenState extends State<TagTapPageScreen> {
         child: Container(
           child: Center(
             child: SingleChildScrollView(
-                          child: Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(

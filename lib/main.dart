@@ -17,6 +17,8 @@ void main() async {
       ChangeNotifierProvider(create: (_)=>ServiceProviders(),) 
     ],
     child: MyApp()));
+  
+  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -36,14 +38,14 @@ class MyApp extends StatelessWidget {
       SaleMenuPageScreen.routeName: (context) => SaleMenuPageScreen(),
       InsertCardPageScreen.routeName: (context) => InsertCardPageScreen(),
     },
-    onGenerateRoute: (settings) {
-      // if (settings.name == ThirdScreen.routeName) {
-      //   return MaterialPageRoute(builder: (context) {
-      //     // return ThirdScreen(data: settings.arguments);
-      //   });
-      // }
-      return null;
-    },
+    // onGenerateRoute: (settings) {
+    //   if (settings.name == "ThirdScreen.routeName") {
+    //     return MaterialPageRoute(builder: (context) {
+    //       return ThirdScreen(data: settings.arguments);
+    //     });
+    //   }
+    //   return null;
+    // },
         
       );
   }

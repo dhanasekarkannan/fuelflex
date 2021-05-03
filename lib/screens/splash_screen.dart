@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
-import 'package:fuelflex/model/masterKeyInfo_model.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:provider/provider.dart';
 import 'loginPage_screen.dart';
+import 'package:http/http.dart' as http;
 
 class SplashScreen extends StatefulWidget {
   static const routeName = TextStrings.appSplashScreenPath;
@@ -19,8 +21,32 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+  }
+
+  Future<void> _showDialog(String msg) async {
+    return showDialog<void>(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("$msg"),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"))
+          ],
+        );
+      },
+      barrierDismissible: false,
+    );
+  }
+
+  void testFunc() {
+    Provider.of<ServiceProviders>(context).setTest(" test msg ");
+    
   }
 
   void serviceCall() {
@@ -34,8 +60,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 content: Text("Request Failed"),
               ),
             );
-
+      setState(() {
+        _loading = false;
+      });
       Future.delayed(Duration(seconds: 3), () {
+        // testFunc();
         value
             ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
             : ScaffoldMessenger.of(context).showSnackBar(
@@ -43,14 +72,28 @@ class _SplashScreenState extends State<SplashScreen> {
                   content: Text("Request Failed"),
                 ),
               );
+      }).catchError((e) {
+        _showDialog(e );
       });
-
-      setState(() {
-        _loading = false;
-      });
-    }).catchError((e) {
-      print(e);
     });
+  }
+
+  Future<void> _checkNetworkConnectivity() async {
+    try {
+      http.Response response = await http.post(
+        Uri.parse("https://www.google.com/"),
+      );
+    } on SocketException catch (e) {
+      print(" SocketException ${e.message}");
+
+      throw ("Socket Exception");
+    } on HttpException catch (e) {
+      print(" SocketException ${e.message}");
+      throw ("Socket Exception");
+    } catch (e) {
+      print(" default exception ${e.message}");
+      throw (e.message);
+    }
   }
 
   @override
@@ -60,11 +103,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+    // _checkNetworkConnectivity()
+    //     .then((_) => {
     if (_loading) {
       serviceCall();
     }
+    //         })
+    //     .catchError((e) {
+    //   _showDialog(e );
+    // });
   }
 
   @override
@@ -75,6 +123,7 @@ class _SplashScreenState extends State<SplashScreen> {
       imagePath: TextStrings.appAssetBackgroundColorPath,
       child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: _size.width * 0.30,
@@ -89,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     child: Text(Provider.of<ServiceProviders>(context)
                         .masterKeyInfo
                         .merchantInfo
-                        .middleName),
+                        .merchantName),
                   ),
           ],
         ),

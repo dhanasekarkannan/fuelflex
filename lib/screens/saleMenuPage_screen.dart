@@ -2,57 +2,80 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/subMenuButton_widget.dart';
+import 'package:provider/provider.dart';
 
-class SaleMenuPageScreen extends StatelessWidget {
+class SaleMenuPageScreen extends StatefulWidget {
   static const String routeName = TextStrings.appSaleScreenPath;
+
+  @override
+  _SaleMenuPageScreenState createState() => _SaleMenuPageScreenState();
+}
+
+class _SaleMenuPageScreenState extends State<SaleMenuPageScreen> {
+  String _value = MenuItems().menuItems[1]["title"];
+  TextEditingController _text1Controller = TextEditingController();
+  TextEditingController _text2Controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    _text2Controller.text = Provider.of<ServiceProviders>(context)
+        .masterKeyInfo
+        .merchantInfo
+        .middleName;
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
       body: BackgroundWidget(
-        imagePath: TextStrings.appAssetBackgroundPlainPath,
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 50),
-              height: _size.height * 0.20,
-              width: _size.width * 0.50,
-              child: Image(
-                image: AssetImage(
-                  TextStrings.appAssetOlaCardColorLogoPath,
-                ),
-                fit: BoxFit.contain,
-              ),
-            ),
-            SizedBox(
-              height: _size.height * 0.25,
-            ),
-            Flexible(
-              child: Container(
-                width: _size.width * 0.75,
-                child: ListView.builder(
-                  itemBuilder: (_, index) {
-                    return Container(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SubMenuButtonWidget(
-                        title: MenuItems().menuItems[index]["title"],
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                              MenuItems().menuItems[index]["onPressed"]);
-                        },
+        imagePath: TextStrings.appAssetBackgroundColorPath,
+        child: Container(
+          margin: EdgeInsets.only(top: _size.height * 0.30),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage(TextStrings.appAssetBackgroundPlainPath),
+            fit: BoxFit.fill,
+          )),
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                color: Colors.grey,
+                child: DropdownButton(
+                  focusColor: Colors.indigo,
+                  items: MenuItems().menuItems.map<DropdownMenuItem<String>>(
+                      (Map<String, dynamic> value) {
+                    return DropdownMenuItem<String>(
+                      value: value["title"],
+                      child: Text(
+                        value["title"],
+                        style: TextStyle(color: Colors.black),
                       ),
                     );
+                  }).toList(),
+                  value: _value,
+                  onChanged: (value) {
+                    setState(() {
+                      _value = value;
+                      _text1Controller.text = _value;
+                    });
                   },
-                  itemCount: MenuItems().menuItems.length,
                 ),
               ),
-            ),
-          ],
-        )),
+              TextField(
+                controller: _text1Controller,
+              ),
+              TextFormField(
+                controller: _text2Controller,
+                decoration: InputDecoration(hintText: "test msg"),
+                validator: (String data) {
+                  int length = data.length;
+                },
+              ),
+            ],
+          )),
+        ),
       ),
     );
   }
@@ -60,8 +83,8 @@ class SaleMenuPageScreen extends StatelessWidget {
 
 class MenuItems {
   List<Map<String, dynamic>> _menuItems = [
-    {"title": "Sale", "onPressed": TextStrings.appInsertCardScreenPath},
-    {"title": "Others", "onPressed": TextStrings.appInsertCardScreenPath},
+    {"title": "clynder", "value": "cly"},
+    {"title": "Petrol", "value": "ptr"},
   ];
 
   UnmodifiableListView<Map<String, dynamic>> get menuItems =>
