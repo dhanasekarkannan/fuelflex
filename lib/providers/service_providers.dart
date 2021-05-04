@@ -30,8 +30,8 @@ class ServiceProviders with ChangeNotifier {
 
   void setTest( String key ){
     _testMsg = key;
-    // _masterKeyInfo.merchantInfo.merchantName = key ;
-  notifyListeners();
+    _masterKeyInfo.merchantInfo.merchantName = key ;
+  // notifyListeners();
   }
 
   Future<bool> testServerRequest() async {

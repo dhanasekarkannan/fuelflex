@@ -44,11 +44,6 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void testFunc() {
-    Provider.of<ServiceProviders>(context).setTest(" test msg ");
-    
-  }
-
   void serviceCall() {
     Provider.of<ServiceProviders>(context).testServerRequest().then((value) {
       value
@@ -64,7 +59,6 @@ class _SplashScreenState extends State<SplashScreen> {
         _loading = false;
       });
       Future.delayed(Duration(seconds: 3), () {
-        // testFunc();
         value
             ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
             : ScaffoldMessenger.of(context).showSnackBar(
@@ -73,8 +67,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               );
       }).catchError((e) {
-        _showDialog(e );
+        print(e.message);
       });
+    }).catchError((e) {
+      _showDialog(e as String);
     });
   }
 
@@ -134,12 +130,14 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             _loading
                 ? CircularProgressIndicator()
-                : Container(
-                    child: Text(Provider.of<ServiceProviders>(context)
-                        .masterKeyInfo
-                        .merchantInfo
-                        .merchantName),
-                  ),
+                : Consumer<ServiceProviders>(builder: (_, service, __) {
+                    return Container(
+                      child: Text(Provider.of<ServiceProviders>(context)
+                          .masterKeyInfo
+                          .merchantInfo
+                          .merchantName),
+                    );
+                  }),
           ],
         ),
       ),
