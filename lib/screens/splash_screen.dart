@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
@@ -6,7 +5,6 @@ import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:provider/provider.dart';
 import 'loginPage_screen.dart';
-import 'package:http/http.dart' as http;
 
 class SplashScreen extends StatefulWidget {
   static const routeName = TextStrings.appSplashScreenPath;
@@ -70,27 +68,28 @@ class _SplashScreenState extends State<SplashScreen> {
         print(e.message);
       });
     }).catchError((e) {
-      _showDialog(e as String);
+      print(e);
+      _showDialog(e.message as String );
     });
   }
 
-  Future<void> _checkNetworkConnectivity() async {
-    try {
-      http.Response response = await http.post(
-        Uri.parse("https://www.google.com/"),
-      );
-    } on SocketException catch (e) {
-      print(" SocketException ${e.message}");
+  // Future<void> _checkNetworkConnectivity() async {
+  //   try {
+  //     http.Response response = await http.post(
+  //       Uri.parse("https://www.google.com/"),
+  //     );
+  //   } on SocketException catch (e) {
+  //     print(" SocketException ${e.message}");
 
-      throw ("Socket Exception");
-    } on HttpException catch (e) {
-      print(" SocketException ${e.message}");
-      throw ("Socket Exception");
-    } catch (e) {
-      print(" default exception ${e.message}");
-      throw (e.message);
-    }
-  }
+  //     throw ("Socket Exception");
+  //   } on HttpException catch (e) {
+  //     print(" SocketException ${e.message}");
+  //     throw ("Socket Exception");
+  //   } catch (e) {
+  //     print(" default exception ${e.message}");
+  //     throw (e.message);
+  //   }
+  // }
 
   @override
   void initState() {
@@ -133,9 +132,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 : Consumer<ServiceProviders>(builder: (_, service, __) {
                     return Container(
                       child: Text(Provider.of<ServiceProviders>(context)
-                          .masterKeyInfo
-                          .merchantInfo
-                          .merchantName),
+                          .testMsg),
                     );
                   }),
           ],
