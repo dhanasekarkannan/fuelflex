@@ -1,21 +1,21 @@
-class RequestInfo {
-  String requestType;
-  String termSerialNum;
-  String version;
+import 'package:built_value/built_value.dart';
 
-  RequestInfo({this.requestType, this.termSerialNum, this.version});
+part 'requestInfo_model.g.dart';
 
-  RequestInfo.fromJson(Map<String, dynamic> json) {
-    requestType = json['RequestType'];
-    termSerialNum = json['TermSerialNum'];
-    version = json['version'];
-  }
+abstract class RequestInfo implements Built<RequestInfo, RequestInfoBuilder> {
+  @BuiltValueField(wireName: "RequestType")
+  String get requestType;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['RequestType'] = this.requestType;
-    data['TermSerialNum'] = this.termSerialNum;
-    data['version'] = this.version;
-    return data;
-  }
+  @nullable
+  @BuiltValueField(wireName: "TermSerialNum")
+  String get termSerialNum;
+
+  @nullable
+  String get version;
+
+  
+
+  RequestInfo._();
+  factory RequestInfo([void Function(RequestInfoBuilder) updates]) =
+      _$RequestInfo;
 }

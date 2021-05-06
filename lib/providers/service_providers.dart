@@ -22,16 +22,22 @@ class ServiceProviders with ChangeNotifier {
       termSerialNum: "0821642298",
       version: "V_1.1.2",
     ),
-  );
 
+    
+  );
 
   ReqInfo get requestInfo => _requestInfo;
 
-
-  void setTest( String key ){
+  void setTest(String key) {
     _testMsg = key;
-    _masterKeyInfo.merchantInfo.merchantName = key ;
-  // notifyListeners();
+    setName("ashok");
+    notifyListeners();
+  }
+
+  void setName(String key) {
+    print("setname called");
+    _masterKeyInfo.merchantInfo.merchantName = key;
+    notifyListeners();
   }
 
   Future<bool> testServerRequest() async {
@@ -39,7 +45,7 @@ class ServiceProviders with ChangeNotifier {
       http.Response response = await http
           .post(_url, body: jsonEncode(requestInfo))
           .timeout(Duration(seconds: 10));
-        
+
       _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
 
       // print("${jsonEncode(masterKeyInfo)}");
