@@ -1,3 +1,5 @@
+library masterKeyInfo_model;
+
 import 'merchantInfo_model.dart';
 import 'reqInfo_model.dart';
 import 'respInfo_model.dart';

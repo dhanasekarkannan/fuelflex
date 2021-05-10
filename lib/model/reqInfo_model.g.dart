@@ -6,9 +6,51 @@ part of 'reqInfo_model.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<ReqInfo> _$reqInfoSerializer = new _$ReqInfoSerializer();
+
+class _$ReqInfoSerializer implements StructuredSerializer<ReqInfo> {
+  @override
+  final Iterable<Type> types = const [ReqInfo, _$ReqInfo];
+  @override
+  final String wireName = 'ReqInfo';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, ReqInfo object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'RequestInfo',
+      serializers.serialize(object.reqInfo,
+          specifiedType: const FullType(RequestInfo)),
+    ];
+
+    return result;
+  }
+
+  @override
+  ReqInfo deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new ReqInfoBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'RequestInfo':
+          result.reqInfo.replace(serializers.deserialize(value,
+              specifiedType: const FullType(RequestInfo)) as RequestInfo);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$ReqInfo extends ReqInfo {
   @override
-  final String reqInfo;
+  final RequestInfo reqInfo;
 
   factory _$ReqInfo([void Function(ReqInfoBuilder) updates]) =>
       (new ReqInfoBuilder()..update(updates)).build();
@@ -45,16 +87,17 @@ class _$ReqInfo extends ReqInfo {
 class ReqInfoBuilder implements Builder<ReqInfo, ReqInfoBuilder> {
   _$ReqInfo _$v;
 
-  String _reqInfo;
-  String get reqInfo => _$this._reqInfo;
-  set reqInfo(String reqInfo) => _$this._reqInfo = reqInfo;
+  RequestInfoBuilder _reqInfo;
+  RequestInfoBuilder get reqInfo =>
+      _$this._reqInfo ??= new RequestInfoBuilder();
+  set reqInfo(RequestInfoBuilder reqInfo) => _$this._reqInfo = reqInfo;
 
   ReqInfoBuilder();
 
   ReqInfoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _reqInfo = $v.reqInfo;
+      _reqInfo = $v.reqInfo.toBuilder();
       _$v = null;
     }
     return this;
@@ -73,10 +116,20 @@ class ReqInfoBuilder implements Builder<ReqInfo, ReqInfoBuilder> {
 
   @override
   _$ReqInfo build() {
-    final _$result = _$v ??
-        new _$ReqInfo._(
-            reqInfo: BuiltValueNullFieldError.checkNotNull(
-                reqInfo, 'ReqInfo', 'reqInfo'));
+    _$ReqInfo _$result;
+    try {
+      _$result = _$v ?? new _$ReqInfo._(reqInfo: reqInfo.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'reqInfo';
+        reqInfo.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ReqInfo', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

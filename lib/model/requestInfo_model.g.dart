@@ -1,10 +1,74 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'requestInfo_model.dart';
+part of requestInfo_model;
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
+
+Serializer<RequestInfo> _$requestInfoSerializer = new _$RequestInfoSerializer();
+
+class _$RequestInfoSerializer implements StructuredSerializer<RequestInfo> {
+  @override
+  final Iterable<Type> types = const [RequestInfo, _$RequestInfo];
+  @override
+  final String wireName = 'RequestInfo';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, RequestInfo object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'RequestType',
+      serializers.serialize(object.requestType,
+          specifiedType: const FullType(String)),
+    ];
+    Object value;
+    value = object.termSerialNum;
+    if (value != null) {
+      result
+        ..add('TermSerialNum')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.version;
+    if (value != null) {
+      result
+        ..add('version')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    return result;
+  }
+
+  @override
+  RequestInfo deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new RequestInfoBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object value = iterator.current;
+      switch (key) {
+        case 'RequestType':
+          result.requestType = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'TermSerialNum':
+          result.termSerialNum = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'version':
+          result.version = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
 
 class _$RequestInfo extends RequestInfo {
   @override
