@@ -17,8 +17,9 @@ package com.example.fuelflex;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.core.app.ActivityOptionsCompat;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;

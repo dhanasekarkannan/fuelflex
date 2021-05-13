@@ -147,7 +147,7 @@
 
 
 
-    <com.paxsz.demo.emvdemo.view.keyboard.DigitKeyboardView
+    <com.example.fuelflex.view.keyboard.DigitKeyboardView
         android:id="@+id/view_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
         android:shadowRadius="0.0"
         app:layout_constraintBottom_toBottomOf="parent">
 
-    </com.paxsz.demo.emvdemo.view.keyboard.DigitKeyboardView>
+    </com.example.fuelflex.view.keyboard.DigitKeyboardView>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0.6dp"

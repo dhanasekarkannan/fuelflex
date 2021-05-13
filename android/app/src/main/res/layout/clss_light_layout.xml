@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal">
 
-    <com.paxsz.demo.emvdemo.view.widget.ClssLight
+    <com.example.fuelflex.view.widget.ClssLight
         android:id="@+id/light1"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_20"
@@ -16,7 +16,7 @@
         app:offSrc="@drawable/led_off"
         app:onSrc="@drawable/led_blue_on" />
 
-    <com.paxsz.demo.emvdemo.view.widget.ClssLight
+    <com.example.fuelflex.view.widget.ClssLight
         android:id="@+id/light2"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_20"
@@ -27,7 +27,7 @@
         app:offSrc="@drawable/led_off"
         app:onSrc="@drawable/led_yellow_on" />
 
-    <com.paxsz.demo.emvdemo.view.widget.ClssLight
+    <com.example.fuelflex.view.widget.ClssLight
         android:id="@+id/light3"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_20"
@@ -38,7 +38,7 @@
         app:offSrc="@drawable/led_off"
         app:onSrc="@drawable/led_green_on" />
 
-    <com.paxsz.demo.emvdemo.view.widget.ClssLight
+    <com.example.fuelflex.view.widget.ClssLight
         android:id="@+id/light4"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_20"

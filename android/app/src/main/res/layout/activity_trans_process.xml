@@ -9,7 +9,7 @@
     tools:context=".trans.TransProcessActivity">
 
 
-    <com.paxsz.demo.emvdemo.view.widget.ClssLightsView
+    <com.example.fuelflex.view.widget.ClssLightsView
         android:id="@+id/layout_clssLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

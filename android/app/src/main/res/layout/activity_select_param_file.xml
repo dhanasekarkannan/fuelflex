@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.paxsz.demo.emvdemo.view.FlowLayout
+            <com.example.fuelflex.view.FlowLayout
                 android:id="@+id/file_container"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
