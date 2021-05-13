@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/providers/emv_providers.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:provider/provider.dart';
@@ -56,20 +56,20 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         _loading = false;
       });
-      Future.delayed(Duration(seconds: 3), () {
-        value
-            ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
-            : ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Request Failed"),
-                ),
-              );
-      }).catchError((e) {
-        print(e.message);
-      });
+      // Future.delayed(Duration(seconds: 3), () {
+      //   value
+      //       ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
+      //       : ScaffoldMessenger.of(context).showSnackBar(
+      //           SnackBar(
+      //             content: Text("Request Failed"),
+      //           ),
+      //         );
+      // }).catchError((e) {
+      //   print(e.message);
+      // });
     }).catchError((e) {
       print(e);
-      _showDialog(e.message as String );
+      _showDialog(e.message as String);
     });
   }
 
@@ -127,14 +127,57 @@ class _SplashScreenState extends State<SplashScreen> {
                 image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
               ),
             ),
-            _loading
-                ? CircularProgressIndicator()
-                : Consumer<ServiceProviders>(builder: (_, service, __) {
-                    return Container(
-                      child: Text(Provider.of<ServiceProviders>(context)
-                          .testMsg),
+            Expanded(
+              child: FutureBuilder(
+                  future: EmvProviders().getCardNo(),
+                  builder: (context, snapshot) {
+                    List<Widget> children;
+                    if (snapshot.hasData) {
+                      children = <Widget>[
+                        Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.green,
+                          size: 60,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: Text('Result: ${snapshot.data}'),
+                        )
+                      ];
+                    } else if (snapshot.hasError) {
+                      children = <Widget>[
+                        Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: Text('Error: ${snapshot.error}', style: TextStyle(fontSize:15 )),
+                        )
+                      ];
+                    } else {
+                      children = <Widget>[
+                        SizedBox(
+                          child: CircularProgressIndicator(),
+                          width: 60,
+                          height: 60,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 16),
+                          child: Text('Awaiting result...'),
+                        )
+                      ];
+                    }
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: children,
+                      ),
                     );
                   }),
+            ),
           ],
         ),
       ),
