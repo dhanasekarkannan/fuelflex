@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/screens/MainPage_screen.dart';
 import 'package:fuelflex/screens/insertCardPage_screen.dart';
@@ -17,6 +18,9 @@ void main() async {
     providers: [
       ChangeNotifierProvider(
         create: (_) => ServiceProviders(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => DataProvider(),
       )
     ],
     child: MyApp(),

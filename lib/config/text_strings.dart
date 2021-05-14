@@ -7,6 +7,16 @@ class TextStrings {
   static const String appSaleScreenPath = "/saleMenuScreen";
   static const String appInsertCardScreenPath = "/inserCardScreen";
 
+  //Constants
+  static const String version = "V_1.1.2";
+
+  //RequestType
+  static const String masterKeyInfoRequestType = "MasterKeyInfo";
+  static const String validateUserRequestType = "ValidateUser";
+  static const String cardInfoRequestType = "CardInfo";
+  static const String cardActivationRequestType = "CardActivation";
+  static const String saleRequestType = "Sale";
+
   //Image Path
   static const String appAssetOlaWhiteLogoPath =
       "assets/images/ola_logo_2-01.png";

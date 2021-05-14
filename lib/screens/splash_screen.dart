@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
-import 'package:fuelflex/providers/emv_providers.dart';
+import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:provider/provider.dart';
-import 'loginPage_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = TextStrings.appSplashScreenPath;
@@ -43,16 +42,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void serviceCall() {
-    Provider.of<ServiceProviders>(context).testServerRequest().then((value) {
-      value
-          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Request Success  "),
-            ))
-          : ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Request Failed"),
-              ),
-            );
+    Provider.of<ServiceProviders>(context).getMasterKeyInfo().then((value) {
+      print("ServiceCAll ${value}");
+      Provider.of<DataProvider>(context).setMasterKeyInfo(value);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Request Success  "),
+      ));
+
       setState(() {
         _loading = false;
       });
