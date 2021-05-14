@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/model/masterKey_info.dart';
-import 'package:fuelflex/model/req_info.dart';
 import 'package:fuelflex/model/request_info.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,6 +46,9 @@ class ServiceProviders with ChangeNotifier {
   }
  
   Future<bool> testServerRequest() async {
+
+   String terminalNo =  platform.invokeMethod("getTerminalNo") as String;
+    print("Method channel Terminal No:  $terminalNo");
     try {
       http.Response response = await http
           .post(_url, body: jsonEncode(requestInfo))
