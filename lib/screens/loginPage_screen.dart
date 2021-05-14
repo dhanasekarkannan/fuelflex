@@ -37,8 +37,7 @@ class LoginPageScreen extends StatelessWidget {
                 child: Consumer<ServiceProviders>(
                     builder: (_, serviceProvider, __) {
                   return MenuButtonWidget(
-                    // title: TextStrings.loginText,
-                    title: serviceProvider.testMsg,
+                    title: TextStrings.loginText,
                     onPressed: () {
                       Navigator.of(context).pushNamed(MainPageScreen.routeName);
                     },

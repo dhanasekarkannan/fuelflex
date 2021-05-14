@@ -20,7 +20,6 @@ class _SaleMenuPageScreenState extends State<SaleMenuPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _text2Controller.text = Provider.of<ServiceProviders>(context).testMsg;
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
       body: BackgroundWidget(

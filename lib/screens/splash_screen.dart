@@ -56,40 +56,11 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         _loading = false;
       });
-      // Future.delayed(Duration(seconds: 3), () {
-      //   value
-      //       ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
-      //       : ScaffoldMessenger.of(context).showSnackBar(
-      //           SnackBar(
-      //             content: Text("Request Failed"),
-      //           ),
-      //         );
-      // }).catchError((e) {
-      //   print(e.message);
-      // });
     }).catchError((e) {
       print(e);
-      _showDialog(e.message as String);
+      _showDialog(e as String);
     });
   }
-
-  // Future<void> _checkNetworkConnectivity() async {
-  //   try {
-  //     http.Response response = await http.post(
-  //       Uri.parse("https://www.google.com/"),
-  //     );
-  //   } on SocketException catch (e) {
-  //     print(" SocketException ${e.message}");
-
-  //     throw ("Socket Exception");
-  //   } on HttpException catch (e) {
-  //     print(" SocketException ${e.message}");
-  //     throw ("Socket Exception");
-  //   } catch (e) {
-  //     print(" default exception ${e.message}");
-  //     throw (e.message);
-  //   }
-  // }
 
   @override
   void initState() {
@@ -99,15 +70,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // _checkNetworkConnectivity()
-    //     .then((_) => {
+
     if (_loading) {
       serviceCall();
     }
-    //         })
-    //     .catchError((e) {
-    //   _showDialog(e );
-    // });
   }
 
   @override
@@ -129,7 +95,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Expanded(
               child: FutureBuilder(
-                  future: EmvProviders().getCardNo(),
+                  future: ServiceProviders().getTerminalNo(),
                   builder: (context, snapshot) {
                     List<Widget> children;
                     if (snapshot.hasData) {
@@ -153,7 +119,8 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
-                          child: Text('Error: ${snapshot.error}', style: TextStyle(fontSize:15 )),
+                          child: Text('Error: ${snapshot.error}',
+                              style: TextStyle(fontSize: 15)),
                         )
                       ];
                     } else {

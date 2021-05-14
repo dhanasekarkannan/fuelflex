@@ -9,6 +9,7 @@ import 'package:fuelflex/model/resp_info.dart';
 import 'package:fuelflex/model/store_info.dart';
 import 'package:fuelflex/model/switch_info.dart';
 import 'package:fuelflex/model/terminal_info.dart';
+import 'package:fuelflex/model/validateUser_info.dart';
 
 part 'serializers.g.dart';
 
@@ -21,6 +22,7 @@ part 'serializers.g.dart';
   StoreInfo,
   SwitchInfo,
   TerminalInfo,
+  ValidateUser
 
 ])
 final Serializers serializers = (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

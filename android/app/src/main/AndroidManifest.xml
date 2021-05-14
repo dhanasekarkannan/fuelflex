@@ -10,10 +10,8 @@
 
    <application
        android:name=".app.EmvDemoApp"
-       android:supportsRtl="true"
        android:label="fuelflex"
-        android:icon="@mipmap/ic_launcher"
-       android:theme="@style/AppTheme">
+       android:icon="@mipmap/ic_launcher">
        <activity android:name=".SelectParamFileActivity"></activity>
        <activity
            android:name=".trans.TransResultActivity"

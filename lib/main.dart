@@ -12,13 +12,15 @@ import 'screens/loginPage_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) => ServiceProviders(),
-    )
-  ], child: MyApp()));
-
- 
+  runApp(
+    MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => ServiceProviders(),
+      )
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -38,14 +40,6 @@ class MyApp extends StatelessWidget {
         SaleMenuPageScreen.routeName: (context) => SaleMenuPageScreen(),
         InsertCardPageScreen.routeName: (context) => InsertCardPageScreen(),
       },
-      // onGenerateRoute: (settings) {
-      //   if (settings.name == "ThirdScreen.routeName") {
-      //     return MaterialPageRoute(builder: (context) {
-      //       return ThirdScreen(data: settings.arguments);
-      //     });
-      //   }
-      //   return null;
-      // },
     );
   }
 }
