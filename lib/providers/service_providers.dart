@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -12,10 +11,6 @@ import 'package:http/http.dart' as http;
 class ServiceProviders with ChangeNotifier {
   static const platform = const MethodChannel('com.example.fuelflex/terminal');
 
-  MasterKeyInfo _masterKeyInfo;
-
-  MasterKeyInfo get masterKeyInfo => _masterKeyInfo;
-
   static Uri _url = Uri.parse(TextStrings.serviceURL);
 
   Future<String> getTerminalNo() async {
@@ -25,26 +20,25 @@ class ServiceProviders with ChangeNotifier {
   }
 
   Future<MasterKeyInfo> getMasterKeyInfo() async {
-    print("test1");
     String _terminalNo = await getTerminalNo();
-        print("test2");
 
     RequestInfo _requestInfo = RequestInfo((b) => b
       ..requestType = TextStrings.masterKeyInfoRequestType
       ..termSerialNum = _terminalNo
       ..version = TextStrings.version);
-          print("test3");
+    ReqInfo _reqInfo =
+        ReqInfo((b) => b..requestInfo = _requestInfo.toBuilder());
+    String masterKeyInfo = await serviceRequest(_reqInfo);
 
-    String masterKeyInfo = await serviceRequest(_requestInfo);
-        print("test4");
+    MasterKeyInfo masterTest = MasterKeyInfo.fromJson(masterKeyInfo);
 
-      return MasterKeyInfo.fromJson(jsonDecode(masterKeyInfo));
+    return masterTest;
   }
 
-  Future<String> serviceRequest(RequestInfo requestInfo) async {
+  Future<String> serviceRequest(ReqInfo reqInfo) async {
     try {
       http.Response response = await http
-          .post(_url, body: jsonEncode(requestInfo))
+          .post(_url, body: reqInfo.toJson())
           .timeout(Duration(seconds: 10));
 
       return response.body;

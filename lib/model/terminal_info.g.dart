@@ -55,8 +55,6 @@ class _$TerminalInfoSerializer implements StructuredSerializer<TerminalInfo> {
       serializers.serialize(object.tmk, specifiedType: const FullType(String)),
       'tpk',
       serializers.serialize(object.tpk, specifiedType: const FullType(String)),
-      'mack',
-      serializers.serialize(object.mack, specifiedType: const FullType(String)),
       'batch_id',
       serializers.serialize(object.batchId,
           specifiedType: const FullType(String)),
@@ -67,7 +65,21 @@ class _$TerminalInfoSerializer implements StructuredSerializer<TerminalInfo> {
       serializers.serialize(object.echoInterval,
           specifiedType: const FullType(int)),
     ];
-
+    Object value;
+    value = object.terminalTypeId;
+    if (value != null) {
+      result
+        ..add('terminal_type_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.mack;
+    if (value != null) {
+      result
+        ..add('mack')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -100,6 +112,10 @@ class _$TerminalInfoSerializer implements StructuredSerializer<TerminalInfo> {
           break;
         case 'terminal_status':
           result.terminalStatus = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'terminal_type_id':
+          result.terminalTypeId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'terminal_name':
@@ -169,6 +185,8 @@ class _$TerminalInfo extends TerminalInfo {
   @override
   final String terminalStatus;
   @override
+  final String terminalTypeId;
+  @override
   final String terminalName;
   @override
   final String machineId;
@@ -202,6 +220,7 @@ class _$TerminalInfo extends TerminalInfo {
       this.storeId,
       this.termId,
       this.terminalStatus,
+      this.terminalTypeId,
       this.terminalName,
       this.machineId,
       this.termLoc,
@@ -233,7 +252,6 @@ class _$TerminalInfo extends TerminalInfo {
     BuiltValueNullFieldError.checkNotNull(currCode, 'TerminalInfo', 'currCode');
     BuiltValueNullFieldError.checkNotNull(tmk, 'TerminalInfo', 'tmk');
     BuiltValueNullFieldError.checkNotNull(tpk, 'TerminalInfo', 'tpk');
-    BuiltValueNullFieldError.checkNotNull(mack, 'TerminalInfo', 'mack');
     BuiltValueNullFieldError.checkNotNull(batchId, 'TerminalInfo', 'batchId');
     BuiltValueNullFieldError.checkNotNull(routeId, 'TerminalInfo', 'routeId');
     BuiltValueNullFieldError.checkNotNull(
@@ -256,6 +274,7 @@ class _$TerminalInfo extends TerminalInfo {
         storeId == other.storeId &&
         termId == other.termId &&
         terminalStatus == other.terminalStatus &&
+        terminalTypeId == other.terminalTypeId &&
         terminalName == other.terminalName &&
         machineId == other.machineId &&
         termLoc == other.termLoc &&
@@ -289,15 +308,19 @@ class _$TerminalInfo extends TerminalInfo {
                                                             $jc(
                                                                 $jc(
                                                                     $jc(
-                                                                        0,
-                                                                        instId
+                                                                        $jc(
+                                                                            0,
+                                                                            instId
+                                                                                .hashCode),
+                                                                        merchantId
                                                                             .hashCode),
-                                                                    merchantId
+                                                                    storeId
                                                                         .hashCode),
-                                                                storeId
+                                                                termId
                                                                     .hashCode),
-                                                            termId.hashCode),
-                                                        terminalStatus
+                                                            terminalStatus
+                                                                .hashCode),
+                                                        terminalTypeId
                                                             .hashCode),
                                                     terminalName.hashCode),
                                                 machineId.hashCode),
@@ -321,6 +344,7 @@ class _$TerminalInfo extends TerminalInfo {
           ..add('storeId', storeId)
           ..add('termId', termId)
           ..add('terminalStatus', terminalStatus)
+          ..add('terminalTypeId', terminalTypeId)
           ..add('terminalName', terminalName)
           ..add('machineId', machineId)
           ..add('termLoc', termLoc)
@@ -361,6 +385,11 @@ class TerminalInfoBuilder
   String get terminalStatus => _$this._terminalStatus;
   set terminalStatus(String terminalStatus) =>
       _$this._terminalStatus = terminalStatus;
+
+  String _terminalTypeId;
+  String get terminalTypeId => _$this._terminalTypeId;
+  set terminalTypeId(String terminalTypeId) =>
+      _$this._terminalTypeId = terminalTypeId;
 
   String _terminalName;
   String get terminalName => _$this._terminalName;
@@ -420,6 +449,7 @@ class TerminalInfoBuilder
       _storeId = $v.storeId;
       _termId = $v.termId;
       _terminalStatus = $v.terminalStatus;
+      _terminalTypeId = $v.terminalTypeId;
       _terminalName = $v.terminalName;
       _machineId = $v.machineId;
       _termLoc = $v.termLoc;
@@ -462,6 +492,7 @@ class TerminalInfoBuilder
                 termId, 'TerminalInfo', 'termId'),
             terminalStatus: BuiltValueNullFieldError.checkNotNull(
                 terminalStatus, 'TerminalInfo', 'terminalStatus'),
+            terminalTypeId: terminalTypeId,
             terminalName: BuiltValueNullFieldError.checkNotNull(
                 terminalName, 'TerminalInfo', 'terminalName'),
             machineId: BuiltValueNullFieldError.checkNotNull(
@@ -474,7 +505,7 @@ class TerminalInfoBuilder
             currCode: BuiltValueNullFieldError.checkNotNull(currCode, 'TerminalInfo', 'currCode'),
             tmk: BuiltValueNullFieldError.checkNotNull(tmk, 'TerminalInfo', 'tmk'),
             tpk: BuiltValueNullFieldError.checkNotNull(tpk, 'TerminalInfo', 'tpk'),
-            mack: BuiltValueNullFieldError.checkNotNull(mack, 'TerminalInfo', 'mack'),
+            mack: mack,
             batchId: BuiltValueNullFieldError.checkNotNull(batchId, 'TerminalInfo', 'batchId'),
             routeId: BuiltValueNullFieldError.checkNotNull(routeId, 'TerminalInfo', 'routeId'),
             echoInterval: BuiltValueNullFieldError.checkNotNull(echoInterval, 'TerminalInfo', 'echoInterval'));

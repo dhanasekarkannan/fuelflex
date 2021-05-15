@@ -42,18 +42,26 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void serviceCall() {
-    Provider.of<ServiceProviders>(context).getMasterKeyInfo().then((value) {
-      print("ServiceCAll ${value}");
-      Provider.of<DataProvider>(context).setMasterKeyInfo(value);
+   
+    Provider.of<ServiceProviders>(context,listen : false )
+        .getMasterKeyInfo()
+        .then((masterKeyInfo) {
+      Provider.of<DataProvider>(context, listen: false)
+          .setMasterKeyInfo(masterKeyInfo);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Request Success  "),
+        content: Text("Request Success"),
       ));
 
       setState(() {
         _loading = false;
       });
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Request Success"),
+
+      ));
+
+      Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
     }).catchError((e) {
-      print(e);
       _showDialog(e as String);
     });
   }
@@ -61,15 +69,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    Future<void>.delayed(Duration(seconds: 0), (){
+      serviceCall();
+    });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (_loading) {
-      serviceCall();
-    }
+    
   }
 
   @override
@@ -88,58 +97,6 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Image(
                 image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
               ),
-            ),
-            Expanded(
-              child: FutureBuilder(
-                  future: ServiceProviders().getTerminalNo(),
-                  builder: (context, snapshot) {
-                    List<Widget> children;
-                    if (snapshot.hasData) {
-                      children = <Widget>[
-                        Icon(
-                          Icons.check_circle_outline,
-                          color: Colors.green,
-                          size: 60,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: Text('Result: ${snapshot.data}'),
-                        )
-                      ];
-                    } else if (snapshot.hasError) {
-                      children = <Widget>[
-                        Icon(
-                          Icons.error_outline,
-                          color: Colors.red,
-                          size: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: Text('Error: ${snapshot.error}',
-                              style: TextStyle(fontSize: 15)),
-                        )
-                      ];
-                    } else {
-                      children = <Widget>[
-                        SizedBox(
-                          child: CircularProgressIndicator(),
-                          width: 60,
-                          height: 60,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 16),
-                          child: Text('Awaiting result...'),
-                        )
-                      ];
-                    }
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: children,
-                      ),
-                    );
-                  }),
             ),
           ],
         ),

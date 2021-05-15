@@ -25,6 +25,9 @@ abstract class TerminalInfo
   String get termId;
   @BuiltValueField(wireName: 'terminal_status')
   String get terminalStatus;
+  @nullable
+  @BuiltValueField(wireName: 'terminal_type_id')
+  String get terminalTypeId;
   @BuiltValueField(wireName: 'terminal_name')
   String get terminalName;
   @BuiltValueField(wireName: 'machine_id')
@@ -41,6 +44,7 @@ abstract class TerminalInfo
   String get tmk;
   @BuiltValueField(wireName: 'tpk')
   String get tpk;
+  @nullable
   @BuiltValueField(wireName: 'mack')
   String get mack;
   @BuiltValueField(wireName: 'batch_id')

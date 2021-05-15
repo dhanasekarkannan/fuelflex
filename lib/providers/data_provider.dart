@@ -8,40 +8,36 @@ import 'package:fuelflex/model/store_info.dart';
 import 'package:fuelflex/model/switch_info.dart';
 import 'package:fuelflex/model/terminal_info.dart';
 
-class DataProvider with ChangeNotifier{
+class DataProvider with ChangeNotifier {
+  MerchantInfo _merchantInfo;
+  MerchantInfo get merchantInfo => _merchantInfo;
 
-MerchantInfo _merchantInfo = MerchantInfo();
-MerchantInfo get merchantInfo => _merchantInfo;
+  ReqInfo _reqInfo;
+  ReqInfo get reqInfo => _reqInfo;
 
-ReqInfo _reqInfo = ReqInfo();
-ReqInfo get reqInfo => _reqInfo;
+  RequestInfo _requestInfo;
+  RequestInfo get requestInfo => _requestInfo;
 
-RequestInfo _requestInfo = RequestInfo();
-RequestInfo get requestInfo => _requestInfo;
+  RespInfo _respInfo;
+  RespInfo get respInfo => _respInfo;
 
-RespInfo _respInfo = RespInfo();
-RespInfo get respInfo => _respInfo;
+  StoreInfo _storeInfo;
+  StoreInfo get storeInfo => _storeInfo;
 
-StoreInfo _storeInfo = StoreInfo();
-StoreInfo get storeInfo => _storeInfo;
+  SwitchInfo _switchInfo;
+  SwitchInfo get switchInfo => _switchInfo;
 
-SwitchInfo _switchInfo = SwitchInfo();
-SwitchInfo get switchInfo => _switchInfo;
+  TerminalInfo _terminalInfo;
+  TerminalInfo get terminalInfo => _terminalInfo;
 
-TerminalInfo _terminalInfo = TerminalInfo();
-TerminalInfo get terminalInfo => _terminalInfo;
-
-void setMasterKeyInfo( MasterKeyInfo masterKeyInfo ){
-  print("setMasterKeyInfo ${masterKeyInfo.merchantInfo.mobileNum1}");
-_merchantInfo = MerchantInfo.fromJson(masterKeyInfo.merchantInfo.toJson());
-_requestInfo = RequestInfo.fromJson(masterKeyInfo.reqInfo.requestInfo.toJson());
-_respInfo = RespInfo.fromJson(masterKeyInfo.respInfo.toJson());
-_storeInfo = StoreInfo.fromJson(masterKeyInfo.storeInfo.toJson());
-_switchInfo = SwitchInfo.fromJson(masterKeyInfo.respInfo.switchInfo.toJson());
-_terminalInfo = TerminalInfo.fromJson(masterKeyInfo.terminalInfo.toJson());
-
-print("data Provider ${_merchantInfo.merchantId}");
-}
-
-
+  void setMasterKeyInfo(MasterKeyInfo masterKeyInfo) {
+    _merchantInfo = MerchantInfo.fromJson(masterKeyInfo.merchantInfo.toJson());
+    _requestInfo =
+        RequestInfo.fromJson(masterKeyInfo.reqInfo.requestInfo.toJson());
+    _respInfo = RespInfo.fromJson(masterKeyInfo.respInfo.toJson());
+    _storeInfo = StoreInfo.fromJson(masterKeyInfo.storeInfo.toJson());
+    _switchInfo =
+        SwitchInfo.fromJson(masterKeyInfo.respInfo.switchInfo.toJson());
+    _terminalInfo = TerminalInfo.fromJson(masterKeyInfo.terminalInfo.toJson());
+  }
 }
