@@ -13,7 +13,7 @@ import 'screens/loginPage_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(
+  runApp( 
     MultiProvider(
     providers: [
       ChangeNotifierProvider(
