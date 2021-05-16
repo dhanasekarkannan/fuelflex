@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/providers/service_providers.dart';
-import 'package:fuelflex/screens/MainPage_screen.dart';
+import 'package:fuelflex/screens/mainPage_screen.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/menuButton_widget.dart';
 import 'package:provider/provider.dart';
