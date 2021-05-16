@@ -1,9 +1,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fuelflex">
+
+    <uses-permission android:name="com.pax.permission.MAGCARD" />
+    <uses-permission android:name="com.pax.permission.PED" />
+    <uses-permission android:name="com.pax.permission.ICC" />
+    <uses-permission android:name="com.pax.permission.PICC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
    <application
-        android:label="fuelflex"
-        android:icon="@mipmap/ic_launcher">
-        <activity
+       android:name=".app.EmvDemoApp"
+       android:label="fuelflex"
+       android:icon="@mipmap/ic_launcher">
+       <activity android:name=".SelectParamFileActivity"></activity>
+       <activity
+           android:name=".trans.TransResultActivity"
+           android:windowSoftInputMode="adjustResize" />
+       <activity android:name=".SettingsActivity" />
+       <activity android:name=".KernelLibInfoActivity" />
+       <activity android:name=".trans.TransProcessActivity" />
+       <activity android:name=".trans.ApduTimeRecordActivity" />
+<!--       <activity-->
+<!--           android:name=".MainActivity"-->
+<!--           android:theme="@style/launcher_activity_style">-->
+<!--           <intent-filter>-->
+<!--               <category android:name="android.intent.category.LAUNCHER" />-->
+
+<!--               <action android:name="android.intent.action.MAIN" />-->
+<!--           </intent-filter>-->
+<!--       </activity>-->
+       <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

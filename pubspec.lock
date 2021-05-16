@@ -91,14 +91,22 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "8.0.6"
+=======
+    version: "8.0.5"
+>>>>>>> methodchannel
   built_value_generator:
     dependency: "direct dev"
     description:
       name: built_value_generator
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "8.0.6"
+=======
+    version: "8.0.5"
+>>>>>>> methodchannel
   characters:
     dependency: transitive
     description:
@@ -168,7 +176,11 @@ packages:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.0.2"
+=======
+    version: "1.0.3"
+>>>>>>> methodchannel
   dart_style:
     dependency: transitive
     description:
@@ -234,7 +246,11 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.13.2"
+=======
+    version: "0.13.3"
+>>>>>>> methodchannel
   http_multi_server:
     dependency: transitive
     description:

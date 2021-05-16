@@ -1,21 +1,19 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fuelflex/config/text_strings.dart';
-import 'package:fuelflex/model/masterKeyInfo_model.dart';
-import 'package:fuelflex/model/reqInfo_model.dart';
-import 'package:fuelflex/model/requestInfo_model.dart';
+import 'package:fuelflex/model/masterKey_info.dart';
+import 'package:fuelflex/model/req_info.dart';
+import 'package:fuelflex/model/request_info.dart';
 import 'package:http/http.dart' as http;
 
 class ServiceProviders with ChangeNotifier {
-  MasterKeyInfo _masterKeyInfo;
-  String _testMsg = "hellow";
-  MasterKeyInfo get masterKeyInfo => _masterKeyInfo;
-  String get testMsg => _testMsg;
+  static const platform = const MethodChannel('com.example.fuelflex/terminal');
 
   static Uri _url = Uri.parse(TextStrings.serviceURL);
 
+<<<<<<< HEAD
   ReqInfo _requestInfo = ReqInfo(
     requestInfo: RequestInfo(
       requestType: "MasterKeyInfo",
@@ -25,9 +23,26 @@ class ServiceProviders with ChangeNotifier {
 
     
   );
+=======
+  Future<String> getTerminalNo() async {
+    String terminalNo = await platform.invokeMethod("getTerminalNo");
+    print("Method channel Terminal No:  $terminalNo");
+    return terminalNo;
+  }
 
-  ReqInfo get requestInfo => _requestInfo;
+  Future<MasterKeyInfo> getMasterKeyInfo() async {
+    String _terminalNo = await getTerminalNo();
+>>>>>>> methodchannel
 
+    RequestInfo _requestInfo = RequestInfo((b) => b
+      ..requestType = TextStrings.masterKeyInfoRequestType
+      ..termSerialNum = _terminalNo
+      ..version = TextStrings.version);
+    ReqInfo _reqInfo =
+        ReqInfo((b) => b..requestInfo = _requestInfo.toBuilder());
+    String masterKeyInfo = await serviceRequest(_reqInfo);
+
+<<<<<<< HEAD
   void setTest(String key) {
     _testMsg = key;
     setName("ashok");
@@ -38,32 +53,33 @@ class ServiceProviders with ChangeNotifier {
     print("setname called");
     _masterKeyInfo.merchantInfo.merchantName = key;
     notifyListeners();
+=======
+    MasterKeyInfo masterTest = MasterKeyInfo.fromJson(masterKeyInfo);
+
+    return masterTest;
+>>>>>>> methodchannel
   }
 
-  Future<bool> testServerRequest() async {
+  Future<String> serviceRequest(ReqInfo reqInfo) async {
     try {
       http.Response response = await http
-          .post(_url, body: jsonEncode(requestInfo))
+          .post(_url, body: reqInfo.toJson())
           .timeout(Duration(seconds: 10));
+<<<<<<< HEAD
 
       _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
 
       // print("${jsonEncode(masterKeyInfo)}");
+=======
+>>>>>>> methodchannel
 
-      // print("______%%%%%_______");
-      print("${jsonEncode(masterKeyInfo.merchantInfo.merchantName)}");
-      // _testMsg = masterKeyInfo.merchantInfo.merchantName;
-      notifyListeners();
-      return true;
+      return response.body;
     } on SocketException catch (e) {
-      print(" SocketException ${e.message}");
-      return false;
+      throw ("SocketException in fetching response");
     } on HttpException catch (e) {
-      print(" SocketException ${e.message}");
-      return false;
+      throw ("HttpException in fetching response");
     } catch (e) {
-      print(" default exception ${e.message}");
-      return false;
+      throw ("Error in fetching response");
     }
   }
 }

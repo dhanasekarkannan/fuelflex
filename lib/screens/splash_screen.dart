@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:provider/provider.dart';
-import 'loginPage_screen.dart';
-import 'package:http/http.dart' as http;
 
 class SplashScreen extends StatefulWidget {
   static const routeName = TextStrings.appSplashScreenPath;
@@ -45,19 +42,20 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void serviceCall() {
-    Provider.of<ServiceProviders>(context).testServerRequest().then((value) {
-      value
-          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Request Success  "),
-            ))
-          : ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Request Failed"),
-              ),
-            );
+   
+    Provider.of<ServiceProviders>(context,listen : false )
+        .getMasterKeyInfo()
+        .then((masterKeyInfo) {
+      Provider.of<DataProvider>(context, listen: false)
+          .setMasterKeyInfo(masterKeyInfo);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Request Success"),
+      ));
+
       setState(() {
         _loading = false;
       });
+<<<<<<< HEAD
       Future.delayed(Duration(seconds: 3), () {
         // value
         //     ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
@@ -71,46 +69,32 @@ class _SplashScreenState extends State<SplashScreen> {
         print(e.message);
         
       });
+=======
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Request Success"),
+
+      ));
+
+      Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
+>>>>>>> methodchannel
     }).catchError((e) {
       _showDialog(e as String);
     });
   }
 
-  Future<void> _checkNetworkConnectivity() async {
-    try {
-      http.Response response = await http.post(
-        Uri.parse("https://www.google.com/"),
-      );
-    } on SocketException catch (e) {
-      print(" SocketException ${e.message}");
-
-      throw ("Socket Exception");
-    } on HttpException catch (e) {
-      print(" SocketException ${e.message}");
-      throw ("Socket Exception");
-    } catch (e) {
-      print(" default exception ${e.message}");
-      throw (e.message);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
+    Future<void>.delayed(Duration(seconds: 0), (){
+      serviceCall();
+    });
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // _checkNetworkConnectivity()
-    //     .then((_) => {
-    if (_loading) {
-      serviceCall();
-    }
-    //         })
-    //     .catchError((e) {
-    //   _showDialog(e );
-    // });
+
+    
   }
 
   @override
@@ -130,6 +114,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
               ),
             ),
+<<<<<<< HEAD
             _loading
                 ? CircularProgressIndicator()
                 : Consumer<ServiceProviders>(builder: (_, service, __) {
@@ -167,6 +152,8 @@ class _SplashScreenState extends State<SplashScreen> {
               },
                          
             ),
+=======
+>>>>>>> methodchannel
           ],
         ),
       ),

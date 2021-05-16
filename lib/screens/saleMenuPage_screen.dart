@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
-import 'package:fuelflex/widgets/subMenuButton_widget.dart';
 import 'package:provider/provider.dart';
 
 class SaleMenuPageScreen extends StatefulWidget {
@@ -21,10 +20,6 @@ class _SaleMenuPageScreenState extends State<SaleMenuPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _text2Controller.text = Provider.of<ServiceProviders>(context)
-        .masterKeyInfo
-        .merchantInfo
-        .middleName;
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
       body: BackgroundWidget(
@@ -69,8 +64,12 @@ class _SaleMenuPageScreenState extends State<SaleMenuPageScreen> {
               TextFormField(
                 controller: _text2Controller,
                 decoration: InputDecoration(hintText: "test msg"),
-                validator: (String data) {
+                validator: (data) {
                   int length = data.length;
+                  if (length < 6) {
+                    return "error max length is 6";
+                  }
+                  return null;
                 },
               ),
             ],

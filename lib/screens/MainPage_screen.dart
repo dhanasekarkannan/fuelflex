@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -5,12 +6,20 @@ import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:fuelflex/widgets/subMenuButton_widget.dart';
 
-class MainPageScreen extends StatelessWidget {
+class MainPageScreen extends StatefulWidget {
   static const String routeName = TextStrings.appMainScreenPath;
+  @override
+  _MainPageScreenState createState() => _MainPageScreenState();
+}
+
+class _MainPageScreenState extends State<MainPageScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: BackgroundWidget(
         imagePath: TextStrings.appAssetBackgroundPlainPath,
