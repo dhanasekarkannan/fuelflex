@@ -13,17 +13,6 @@ class ServiceProviders with ChangeNotifier {
 
   static Uri _url = Uri.parse(TextStrings.serviceURL);
 
-<<<<<<< HEAD
-  ReqInfo _requestInfo = ReqInfo(
-    requestInfo: RequestInfo(
-      requestType: "MasterKeyInfo",
-      termSerialNum: "0821642298",
-      version: "V_1.1.2",
-    ),
-
-    
-  );
-=======
   Future<String> getTerminalNo() async {
     String terminalNo = await platform.invokeMethod("getTerminalNo");
     print("Method channel Terminal No:  $terminalNo");
@@ -32,7 +21,6 @@ class ServiceProviders with ChangeNotifier {
 
   Future<MasterKeyInfo> getMasterKeyInfo() async {
     String _terminalNo = await getTerminalNo();
->>>>>>> methodchannel
 
     RequestInfo _requestInfo = RequestInfo((b) => b
       ..requestType = TextStrings.masterKeyInfoRequestType
@@ -42,22 +30,9 @@ class ServiceProviders with ChangeNotifier {
         ReqInfo((b) => b..requestInfo = _requestInfo.toBuilder());
     String masterKeyInfo = await serviceRequest(_reqInfo);
 
-<<<<<<< HEAD
-  void setTest(String key) {
-    _testMsg = key;
-    setName("ashok");
-    notifyListeners();
-  }
-
-  void setName(String key) {
-    print("setname called");
-    _masterKeyInfo.merchantInfo.merchantName = key;
-    notifyListeners();
-=======
     MasterKeyInfo masterTest = MasterKeyInfo.fromJson(masterKeyInfo);
 
     return masterTest;
->>>>>>> methodchannel
   }
 
   Future<String> serviceRequest(ReqInfo reqInfo) async {
@@ -65,13 +40,6 @@ class ServiceProviders with ChangeNotifier {
       http.Response response = await http
           .post(_url, body: reqInfo.toJson())
           .timeout(Duration(seconds: 10));
-<<<<<<< HEAD
-
-      _masterKeyInfo = MasterKeyInfo.fromJson(jsonDecode(response.body));
-
-      // print("${jsonEncode(masterKeyInfo)}");
-=======
->>>>>>> methodchannel
 
       return response.body;
     } on SocketException catch (e) {

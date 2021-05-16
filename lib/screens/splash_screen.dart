@@ -55,28 +55,12 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         _loading = false;
       });
-<<<<<<< HEAD
-      Future.delayed(Duration(seconds: 3), () {
-        // value
-        //     ? Navigator.of(context).pushNamed(LoginPageScreen.routeName)
-        //     : ScaffoldMessenger.of(context).showSnackBar(
-        //         SnackBar(
-        //           content: Text("Request Failed"),
-        //         ),
-        //       );
-        Provider.of<ServiceProviders>(context, listen: false).setTest("Eswar");
-      }).catchError((e) {
-        print(e.message);
-        
-      });
-=======
        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Request Success"),
 
       ));
 
       Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
->>>>>>> methodchannel
     }).catchError((e) {
       _showDialog(e as String);
     });
@@ -114,46 +98,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 image: AssetImage(TextStrings.appAssetOlaWhiteLogoPath),
               ),
             ),
-<<<<<<< HEAD
-            _loading
-                ? CircularProgressIndicator()
-                : Consumer<ServiceProviders>(builder: (_, service, __) {
-                    return Container(
-                      child:
-                          Text(service.masterKeyInfo.merchantInfo.merchantName),
-                    );
-                  }),
-            _loading
-                ? CircularProgressIndicator()
-                : Container(
-                    child: Text(Provider.of<ServiceProviders>(
-                      context,
-                    ).masterKeyInfo.merchantInfo.merchantName),
-                  ),
-            _loading
-                ? CircularProgressIndicator()
-                : Container(
-                    child: Text(Provider.of<ServiceProviders>(
-                      context,
-                    ).testMsg),
-                  ),
-            Consumer<ServiceProviders>(
-              builder: ( context, service , widget ){
-                return ElevatedButton(
-                  onPressed: () {
-                    print("on pressed Called");
-                    service.setName("Rajesh ___ ####");
-                        print("on pressed Called 2");
-                  },
-                  child: Text(service
-                      .masterKeyInfo
-                      .terminalInfo
-                      .storeId));
-              },
-                         
-            ),
-=======
->>>>>>> methodchannel
           ],
         ),
       ),
