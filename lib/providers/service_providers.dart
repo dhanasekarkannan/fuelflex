@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/model/fuelFlexApiException.dart';
 import 'package:fuelflex/model/masterKey_info.dart';
 import 'package:fuelflex/model/req_info.dart';
 import 'package:fuelflex/model/request_info.dart';
@@ -31,6 +32,7 @@ class ServiceProviders with ChangeNotifier {
     String masterKeyInfo = await serviceRequest(_reqInfo);
 
     MasterKeyInfo masterTest = MasterKeyInfo.fromJson(masterKeyInfo);
+    masterTest.toBuilder();
 
     return masterTest;
   }
@@ -42,12 +44,13 @@ class ServiceProviders with ChangeNotifier {
           .timeout(Duration(seconds: 10));
 
       return response.body;
-    } on SocketException catch (e) {
-      throw ("SocketException in fetching response");
-    } on HttpException catch (e) {
-      throw ("HttpException in fetching response");
+    } on SocketException {
+      throw FuelFlexApiException(
+          message: "SocketException in fetching response");
+    } on HttpException {
+      throw FuelFlexApiException(message: "HttpException in fetching response");
     } catch (e) {
-      throw ("Error in fetching response");
+      throw FuelFlexApiException(message: "Error in fetching response");
     }
   }
 }

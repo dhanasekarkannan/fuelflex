@@ -1,10 +1,13 @@
 package com.example.fuelflex
 
 import androidx.annotation.NonNull
+import com.example.fuelflex.trans.mvp.detectcard.NeptunePollingPresenter
 import com.example.fuelflex.util.AppDataUtils
+import com.pax.dal.entity.EReaderType
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+
 
 
 class MainActivity : FlutterActivity() {
@@ -20,6 +23,16 @@ class MainActivity : FlutterActivity() {
                 var terminalSN = getTerminalNo();
                 result.success(terminalSN);
             }
+            if(call.method == "detectCard"){
+                var readType : EReaderType
+                if(call.argument<String>("cardType") == "X002"){
+                   readType = EReaderType.MAG;
+                }else{
+                    readType = EReaderType.DEFAULT;
+                }
+                var startDetectCard = detectCard(readType);
+                result.success(startDetectCard);
+            }
             else{
                 result.notImplemented();
             }
@@ -29,7 +42,16 @@ class MainActivity : FlutterActivity() {
 
 
     private fun getTerminalNo(): String {
-        return AppDataUtils.getSN();
+        return AppDataUtils.getSN()
+    }
+
+
+    private fun detectCard( readType :EReaderType ) : String {
+       var str =  AppDataUtils.getSN()
+        var detect = NeptunePollingPresenter()
+        detect.startDetectCard( readType )
+
+        return str;
     }
 
 }

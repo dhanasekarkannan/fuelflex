@@ -1,4 +1,3 @@
-
 library master_key_info;
 
 import 'dart:convert';
@@ -17,31 +16,35 @@ part 'masterKey_info.g.dart';
 
 abstract class MasterKeyInfo
     implements Built<MasterKeyInfo, MasterKeyInfoBuilder> {
-  
-    static Serializer<MasterKeyInfo> get serializer => _$masterKeyInfoSerializer;
+  static Serializer<MasterKeyInfo> get serializer => _$masterKeyInfoSerializer;
 
-MasterKeyInfo._();
+  MasterKeyInfo._();
 
   factory MasterKeyInfo([updates(MasterKeyInfoBuilder b)]) = _$MasterKeyInfo;
-
+  @nullable
   @BuiltValueField(wireName: 'merchant_info')
   MerchantInfo get merchantInfo;
+  @nullable
   @BuiltValueField(wireName: 'req_info')
   ReqInfo get reqInfo;
+  @nullable
   @BuiltValueField(wireName: 'resp_info')
   RespInfo get respInfo;
+  @nullable
   @BuiltValueField(wireName: 'store_info')
   StoreInfo get storeInfo;
+  @nullable
   @BuiltValueField(wireName: 'terminal_info')
   TerminalInfo get terminalInfo;
+  @nullable
   String toJson() {
     return json
         .encode(serializers.serializeWith(MasterKeyInfo.serializer, this));
   }
 
+  @nullable
   static MasterKeyInfo fromJson(String jsonString) {
     return serializers.deserializeWith(
         MasterKeyInfo.serializer, json.decode(jsonString));
   }
-
 }

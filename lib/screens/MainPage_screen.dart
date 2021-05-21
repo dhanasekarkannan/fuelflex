@@ -48,7 +48,6 @@ class _MainPageScreenState extends State<MainPageScreen> {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
             onTap: _handleUserInteraction,
-      // onPointerSignal: _handleUserInteraction,
       child: Scaffold(
         body: BackgroundWidget(
           imagePath: TextStrings.appAssetBackgroundPlainPath,

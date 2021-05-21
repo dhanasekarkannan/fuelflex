@@ -31,7 +31,7 @@ class DataProvider with ChangeNotifier {
   TerminalInfo get terminalInfo => _terminalInfo;
 
   void setMasterKeyInfo(MasterKeyInfo masterKeyInfo) {
-    _merchantInfo = MerchantInfo.fromJson(masterKeyInfo.merchantInfo.toJson());
+    _merchantInfo = MerchantInfo.fromJson(masterKeyInfo.merchantInfo.toJson()) ;
     _requestInfo =
         RequestInfo.fromJson(masterKeyInfo.reqInfo.requestInfo.toJson());
     _respInfo = RespInfo.fromJson(masterKeyInfo.respInfo.toJson());

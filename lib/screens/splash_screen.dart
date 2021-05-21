@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
+import 'package:fuelflex/model/masterKey_info.dart';
 import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
@@ -42,34 +43,29 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void serviceCall() {
-   
-    Provider.of<ServiceProviders>(context,listen : false )
+    Provider.of<ServiceProviders>(context, listen: false)
         .getMasterKeyInfo()
         .then((masterKeyInfo) {
-      Provider.of<DataProvider>(context, listen: false)
-          .setMasterKeyInfo(masterKeyInfo);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Request Success"),
-      ));
+          Provider.of<DataProvider>(context, listen: false)
+              .setMasterKeyInfo(masterKeyInfo);
 
-      setState(() {
-        _loading = false;
-      });
-       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Request Success"),
+          setState(() {
+            _loading = false;
+          });
 
-      ));
-
-      Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
-    }).catchError((e) {
-      _showDialog(e as String);
-    });
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Request Success 1${masterKeyInfo.merchantInfo.merchantName}"),
+          ));
+          // Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
+        }).catchError((e) {
+          _showDialog(e as String);
+        });
   }
 
   @override
   void initState() {
     super.initState();
-    Future<void>.delayed(Duration(seconds: 0), (){
+    Future<void>.delayed(Duration(seconds: 0), () {
       serviceCall();
     });
   }
@@ -77,8 +73,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    
   }
 
   @override

@@ -18,24 +18,43 @@ class _$MasterKeyInfoSerializer implements StructuredSerializer<MasterKeyInfo> {
   @override
   Iterable<Object> serialize(Serializers serializers, MasterKeyInfo object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'merchant_info',
-      serializers.serialize(object.merchantInfo,
-          specifiedType: const FullType(MerchantInfo)),
-      'req_info',
-      serializers.serialize(object.reqInfo,
-          specifiedType: const FullType(ReqInfo)),
-      'resp_info',
-      serializers.serialize(object.respInfo,
-          specifiedType: const FullType(RespInfo)),
-      'store_info',
-      serializers.serialize(object.storeInfo,
-          specifiedType: const FullType(StoreInfo)),
-      'terminal_info',
-      serializers.serialize(object.terminalInfo,
-          specifiedType: const FullType(TerminalInfo)),
-    ];
-
+    final result = <Object>[];
+    Object value;
+    value = object.merchantInfo;
+    if (value != null) {
+      result
+        ..add('merchant_info')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(MerchantInfo)));
+    }
+    value = object.reqInfo;
+    if (value != null) {
+      result
+        ..add('req_info')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(ReqInfo)));
+    }
+    value = object.respInfo;
+    if (value != null) {
+      result
+        ..add('resp_info')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(RespInfo)));
+    }
+    value = object.storeInfo;
+    if (value != null) {
+      result
+        ..add('store_info')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(StoreInfo)));
+    }
+    value = object.terminalInfo;
+    if (value != null) {
+      result
+        ..add('terminal_info')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(TerminalInfo)));
+    }
     return result;
   }
 
@@ -99,17 +118,7 @@ class _$MasterKeyInfo extends MasterKeyInfo {
       this.respInfo,
       this.storeInfo,
       this.terminalInfo})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(
-        merchantInfo, 'MasterKeyInfo', 'merchantInfo');
-    BuiltValueNullFieldError.checkNotNull(reqInfo, 'MasterKeyInfo', 'reqInfo');
-    BuiltValueNullFieldError.checkNotNull(
-        respInfo, 'MasterKeyInfo', 'respInfo');
-    BuiltValueNullFieldError.checkNotNull(
-        storeInfo, 'MasterKeyInfo', 'storeInfo');
-    BuiltValueNullFieldError.checkNotNull(
-        terminalInfo, 'MasterKeyInfo', 'terminalInfo');
-  }
+      : super._();
 
   @override
   MasterKeyInfo rebuild(void Function(MasterKeyInfoBuilder) updates) =>
@@ -185,11 +194,11 @@ class MasterKeyInfoBuilder
   MasterKeyInfoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _merchantInfo = $v.merchantInfo.toBuilder();
-      _reqInfo = $v.reqInfo.toBuilder();
-      _respInfo = $v.respInfo.toBuilder();
-      _storeInfo = $v.storeInfo.toBuilder();
-      _terminalInfo = $v.terminalInfo.toBuilder();
+      _merchantInfo = $v.merchantInfo?.toBuilder();
+      _reqInfo = $v.reqInfo?.toBuilder();
+      _respInfo = $v.respInfo?.toBuilder();
+      _storeInfo = $v.storeInfo?.toBuilder();
+      _terminalInfo = $v.terminalInfo?.toBuilder();
       _$v = null;
     }
     return this;
@@ -212,24 +221,24 @@ class MasterKeyInfoBuilder
     try {
       _$result = _$v ??
           new _$MasterKeyInfo._(
-              merchantInfo: merchantInfo.build(),
-              reqInfo: reqInfo.build(),
-              respInfo: respInfo.build(),
-              storeInfo: storeInfo.build(),
-              terminalInfo: terminalInfo.build());
+              merchantInfo: _merchantInfo?.build(),
+              reqInfo: _reqInfo?.build(),
+              respInfo: _respInfo?.build(),
+              storeInfo: _storeInfo?.build(),
+              terminalInfo: _terminalInfo?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'merchantInfo';
-        merchantInfo.build();
+        _merchantInfo?.build();
         _$failedField = 'reqInfo';
-        reqInfo.build();
+        _reqInfo?.build();
         _$failedField = 'respInfo';
-        respInfo.build();
+        _respInfo?.build();
         _$failedField = 'storeInfo';
-        storeInfo.build();
+        _storeInfo?.build();
         _$failedField = 'terminalInfo';
-        terminalInfo.build();
+        _terminalInfo?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'MasterKeyInfo', _$failedField, e.toString());
