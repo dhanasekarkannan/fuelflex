@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Request Success 1${masterKeyInfo.merchantInfo.merchantName}"),
           ));
-          // Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
+          Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
         }).catchError((e) {
           _showDialog(e as String);
         });
