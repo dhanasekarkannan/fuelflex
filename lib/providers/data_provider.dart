@@ -7,6 +7,7 @@ import 'package:fuelflex/model/resp_info.dart';
 import 'package:fuelflex/model/store_info.dart';
 import 'package:fuelflex/model/switch_info.dart';
 import 'package:fuelflex/model/terminal_info.dart';
+import 'package:fuelflex/model/validateUser_info.dart';
 
 class DataProvider with ChangeNotifier {
   MerchantInfo _merchantInfo;
@@ -31,7 +32,7 @@ class DataProvider with ChangeNotifier {
   TerminalInfo get terminalInfo => _terminalInfo;
 
   void setMasterKeyInfo(MasterKeyInfo masterKeyInfo) {
-    _merchantInfo = MerchantInfo.fromJson(masterKeyInfo.merchantInfo.toJson()) ;
+    _merchantInfo = MerchantInfo.fromJson(masterKeyInfo.merchantInfo.toJson());
     _requestInfo =
         RequestInfo.fromJson(masterKeyInfo.reqInfo.requestInfo.toJson());
     _respInfo = RespInfo.fromJson(masterKeyInfo.respInfo.toJson());
@@ -39,5 +40,18 @@ class DataProvider with ChangeNotifier {
     _switchInfo =
         SwitchInfo.fromJson(masterKeyInfo.respInfo.switchInfo.toJson());
     _terminalInfo = TerminalInfo.fromJson(masterKeyInfo.terminalInfo.toJson());
+    notifyListeners();
+  }
+
+  void setValidateUserInfo(ValidateUser validateUser) {
+    _merchantInfo = MerchantInfo.fromJson(validateUser.merchantInfo.toJson());
+    _requestInfo =
+        RequestInfo.fromJson(validateUser.reqInfo.requestInfo.toJson());
+    _respInfo = RespInfo.fromJson(validateUser.respInfo.toJson());
+    _storeInfo = StoreInfo.fromJson(validateUser.storeInfo.toJson());
+    _switchInfo =
+        SwitchInfo.fromJson(validateUser.respInfo.switchInfo.toJson());
+    _terminalInfo = TerminalInfo.fromJson(validateUser.terminalInfo.toJson());
+    notifyListeners();
   }
 }

@@ -131,7 +131,7 @@ class _$RequestInfoSerializer implements StructuredSerializer<RequestInfo> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.operator;
+    value = object.optr;
     if (value != null) {
       result
         ..add('Operator')
@@ -231,7 +231,7 @@ class _$RequestInfoSerializer implements StructuredSerializer<RequestInfo> {
               specifiedType: const FullType(String)) as String;
           break;
         case 'Operator':
-          result.operator = serializers.deserialize(value,
+          result.optr = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'Operatortype':
@@ -283,7 +283,7 @@ class _$RequestInfo extends RequestInfo {
   @override
   final String productCode;
   @override
-  final String operator;
+  final String optr;
   @override
   final String operatorType;
   @override
@@ -309,7 +309,7 @@ class _$RequestInfo extends RequestInfo {
       this.odometer,
       this.regNo,
       this.productCode,
-      this.operator,
+      this.optr,
       this.operatorType,
       this.version})
       : super._();
@@ -341,7 +341,7 @@ class _$RequestInfo extends RequestInfo {
         odometer == other.odometer &&
         regNo == other.regNo &&
         productCode == other.productCode &&
-        operator == other.operator &&
+        optr == other.optr &&
         operatorType == other.operatorType &&
         version == other.version;
   }
@@ -388,7 +388,7 @@ class _$RequestInfo extends RequestInfo {
                             odometer.hashCode),
                         regNo.hashCode),
                     productCode.hashCode),
-                operator.hashCode),
+                optr.hashCode),
             operatorType.hashCode),
         version.hashCode));
   }
@@ -412,7 +412,7 @@ class _$RequestInfo extends RequestInfo {
           ..add('odometer', odometer)
           ..add('regNo', regNo)
           ..add('productCode', productCode)
-          ..add('operator', operator)
+          ..add('optr', optr)
           ..add('operatorType', operatorType)
           ..add('version', version))
         .toString();
@@ -487,9 +487,9 @@ class RequestInfoBuilder implements Builder<RequestInfo, RequestInfoBuilder> {
   String get productCode => _$this._productCode;
   set productCode(String productCode) => _$this._productCode = productCode;
 
-  String _operator;
-  String get operator => _$this._operator;
-  set operator(String operator) => _$this._operator = operator;
+  String _optr;
+  String get optr => _$this._optr;
+  set optr(String optr) => _$this._optr = optr;
 
   String _operatorType;
   String get operatorType => _$this._operatorType;
@@ -520,7 +520,7 @@ class RequestInfoBuilder implements Builder<RequestInfo, RequestInfoBuilder> {
       _odometer = $v.odometer;
       _regNo = $v.regNo;
       _productCode = $v.productCode;
-      _operator = $v.operator;
+      _optr = $v.optr;
       _operatorType = $v.operatorType;
       _version = $v.version;
       _$v = null;
@@ -559,7 +559,7 @@ class RequestInfoBuilder implements Builder<RequestInfo, RequestInfoBuilder> {
             odometer: odometer,
             regNo: regNo,
             productCode: productCode,
-            operator: operator,
+            optr: optr,
             operatorType: operatorType,
             version: version);
     replace(_$result);

@@ -63,7 +63,7 @@ abstract class RequestInfo implements Built<RequestInfo, RequestInfoBuilder> {
   String get productCode;
   @nullable
   @BuiltValueField(wireName: 'Operator')
-  String get operator;
+  String get optr;
   @nullable
   @BuiltValueField(wireName: 'Operatortype')
   String get operatorType;

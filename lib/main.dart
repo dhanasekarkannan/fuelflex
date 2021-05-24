@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
-import 'package:fuelflex/screens/MainPage_screen.dart';
+import 'package:fuelflex/screens/mainPage_screen.dart';
 import 'package:fuelflex/screens/insertCardPage_screen.dart';
 import 'package:fuelflex/screens/saleMenuPage_screen.dart';
 import 'package:fuelflex/screens/splash_screen.dart';

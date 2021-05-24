@@ -7,6 +7,7 @@ import 'package:fuelflex/model/fuelFlexApiException.dart';
 import 'package:fuelflex/model/masterKey_info.dart';
 import 'package:fuelflex/model/req_info.dart';
 import 'package:fuelflex/model/request_info.dart';
+import 'package:fuelflex/model/validateUser_info.dart';
 import 'package:http/http.dart' as http;
 
 class ServiceProviders with ChangeNotifier {
@@ -35,6 +36,26 @@ class ServiceProviders with ChangeNotifier {
     masterTest.toBuilder();
 
     return masterTest;
+  }
+
+
+  Future<ValidateUser> getValidateUser() async {
+    String _terminalNo = await getTerminalNo();
+
+    RequestInfo _requestInfo = RequestInfo((b) => b
+      ..requestType = TextStrings.validateUserRequestType
+      ..termSerialNum = "0821642299"
+      ..version = TextStrings.version
+      ..optr = "123456789012"
+      ..operatorType = "DEALER"); 
+    ReqInfo _reqInfo =
+        ReqInfo((b) => b..requestInfo = _requestInfo.toBuilder());
+    String validateUserResponse = await serviceRequest(_reqInfo);
+
+    ValidateUser validateUser = ValidateUser.fromJson(validateUserResponse);
+   
+
+    return validateUser;
   }
 
   Future<String> serviceRequest(ReqInfo reqInfo) async {

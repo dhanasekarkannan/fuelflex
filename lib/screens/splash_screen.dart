@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
 import 'package:fuelflex/model/masterKey_info.dart';
+import 'package:fuelflex/model/merchant_info.dart';
 import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
@@ -46,20 +47,33 @@ class _SplashScreenState extends State<SplashScreen> {
     Provider.of<ServiceProviders>(context, listen: false)
         .getMasterKeyInfo()
         .then((masterKeyInfo) {
-          Provider.of<DataProvider>(context, listen: false)
-              .setMasterKeyInfo(masterKeyInfo);
+      Provider.of<DataProvider>(context, listen: false)
+          .setMasterKeyInfo(masterKeyInfo);
 
-          setState(() {
-            _loading = false;
-          });
+      setState(() {
+        _loading = false;
+      });
 
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Request Success 1${masterKeyInfo.merchantInfo.merchantName}"),
-          ));
-          Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
-        }).catchError((e) {
-          _showDialog(e as String);
-        });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("MasterKey Request Success "),
+      ));
+      // Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
+    }).then((_) {
+      Provider.of<ServiceProviders>(context, listen: false)
+          .getValidateUser()
+          .then((validateUser) {
+        Provider.of<DataProvider>(context, listen: false)
+            .setValidateUserInfo(validateUser);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Validator Request Success "),
+        ));
+        Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
+      });
+    }).catchError((e) {
+      print(e);
+      _showDialog(e as String);
+    });
   }
 
   @override

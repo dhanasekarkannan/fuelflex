@@ -17,58 +17,127 @@ class _$SwitchInfoSerializer implements StructuredSerializer<SwitchInfo> {
   @override
   Iterable<Object> serialize(Serializers serializers, SwitchInfo object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'mti',
-      serializers.serialize(object.mti, specifiedType: const FullType(String)),
-      'bitmap',
-      serializers.serialize(object.bitmap,
-          specifiedType: const FullType(String)),
-      'fld3',
-      serializers.serialize(object.fld3, specifiedType: const FullType(String)),
-      'fld11',
-      serializers.serialize(object.fld11,
-          specifiedType: const FullType(String)),
-      'fld12',
-      serializers.serialize(object.fld12,
-          specifiedType: const FullType(String)),
-      'fld13',
-      serializers.serialize(object.fld13,
-          specifiedType: const FullType(String)),
-      'fld24',
-      serializers.serialize(object.fld24,
-          specifiedType: const FullType(String)),
-      'fld37',
-      serializers.serialize(object.fld37,
-          specifiedType: const FullType(String)),
-      'fld39',
-      serializers.serialize(object.fld39,
-          specifiedType: const FullType(String)),
-      'fld41',
-      serializers.serialize(object.fld41,
-          specifiedType: const FullType(String)),
-      'fld42',
-      serializers.serialize(object.fld42,
-          specifiedType: const FullType(String)),
-      'fld45',
-      serializers.serialize(object.fld45,
-          specifiedType: const FullType(String)),
-      'fld58',
-      serializers.serialize(object.fld58,
-          specifiedType: const FullType(String)),
-      'fld59',
-      serializers.serialize(object.fld59,
-          specifiedType: const FullType(String)),
-      'fld60',
-      serializers.serialize(object.fld60,
-          specifiedType: const FullType(String)),
-      'fld61',
-      serializers.serialize(object.fld61,
-          specifiedType: const FullType(String)),
-      'fld70',
-      serializers.serialize(object.fld70,
-          specifiedType: const FullType(String)),
-    ];
-
+    final result = <Object>[];
+    Object value;
+    value = object.mti;
+    if (value != null) {
+      result
+        ..add('mti')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.bitmap;
+    if (value != null) {
+      result
+        ..add('bitmap')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld3;
+    if (value != null) {
+      result
+        ..add('fld3')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld11;
+    if (value != null) {
+      result
+        ..add('fld11')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld12;
+    if (value != null) {
+      result
+        ..add('fld12')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld13;
+    if (value != null) {
+      result
+        ..add('fld13')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld24;
+    if (value != null) {
+      result
+        ..add('fld24')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld37;
+    if (value != null) {
+      result
+        ..add('fld37')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld39;
+    if (value != null) {
+      result
+        ..add('fld39')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld41;
+    if (value != null) {
+      result
+        ..add('fld41')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld42;
+    if (value != null) {
+      result
+        ..add('fld42')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld45;
+    if (value != null) {
+      result
+        ..add('fld45')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld58;
+    if (value != null) {
+      result
+        ..add('fld58')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld59;
+    if (value != null) {
+      result
+        ..add('fld59')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld60;
+    if (value != null) {
+      result
+        ..add('fld60')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld61;
+    if (value != null) {
+      result
+        ..add('fld61')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.fld70;
+    if (value != null) {
+      result
+        ..add('fld70')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     return result;
   }
 
@@ -215,25 +284,7 @@ class _$SwitchInfo extends SwitchInfo {
       this.fld60,
       this.fld61,
       this.fld70})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(mti, 'SwitchInfo', 'mti');
-    BuiltValueNullFieldError.checkNotNull(bitmap, 'SwitchInfo', 'bitmap');
-    BuiltValueNullFieldError.checkNotNull(fld3, 'SwitchInfo', 'fld3');
-    BuiltValueNullFieldError.checkNotNull(fld11, 'SwitchInfo', 'fld11');
-    BuiltValueNullFieldError.checkNotNull(fld12, 'SwitchInfo', 'fld12');
-    BuiltValueNullFieldError.checkNotNull(fld13, 'SwitchInfo', 'fld13');
-    BuiltValueNullFieldError.checkNotNull(fld24, 'SwitchInfo', 'fld24');
-    BuiltValueNullFieldError.checkNotNull(fld37, 'SwitchInfo', 'fld37');
-    BuiltValueNullFieldError.checkNotNull(fld39, 'SwitchInfo', 'fld39');
-    BuiltValueNullFieldError.checkNotNull(fld41, 'SwitchInfo', 'fld41');
-    BuiltValueNullFieldError.checkNotNull(fld42, 'SwitchInfo', 'fld42');
-    BuiltValueNullFieldError.checkNotNull(fld45, 'SwitchInfo', 'fld45');
-    BuiltValueNullFieldError.checkNotNull(fld58, 'SwitchInfo', 'fld58');
-    BuiltValueNullFieldError.checkNotNull(fld59, 'SwitchInfo', 'fld59');
-    BuiltValueNullFieldError.checkNotNull(fld60, 'SwitchInfo', 'fld60');
-    BuiltValueNullFieldError.checkNotNull(fld61, 'SwitchInfo', 'fld61');
-    BuiltValueNullFieldError.checkNotNull(fld70, 'SwitchInfo', 'fld70');
-  }
+      : super._();
 
   @override
   SwitchInfo rebuild(void Function(SwitchInfoBuilder) updates) =>
@@ -443,40 +494,23 @@ class SwitchInfoBuilder implements Builder<SwitchInfo, SwitchInfoBuilder> {
   _$SwitchInfo build() {
     final _$result = _$v ??
         new _$SwitchInfo._(
-            mti:
-                BuiltValueNullFieldError.checkNotNull(mti, 'SwitchInfo', 'mti'),
-            bitmap: BuiltValueNullFieldError.checkNotNull(
-                bitmap, 'SwitchInfo', 'bitmap'),
-            fld3: BuiltValueNullFieldError.checkNotNull(
-                fld3, 'SwitchInfo', 'fld3'),
-            fld11: BuiltValueNullFieldError.checkNotNull(
-                fld11, 'SwitchInfo', 'fld11'),
-            fld12: BuiltValueNullFieldError.checkNotNull(
-                fld12, 'SwitchInfo', 'fld12'),
-            fld13: BuiltValueNullFieldError.checkNotNull(
-                fld13, 'SwitchInfo', 'fld13'),
-            fld24: BuiltValueNullFieldError.checkNotNull(
-                fld24, 'SwitchInfo', 'fld24'),
-            fld37: BuiltValueNullFieldError.checkNotNull(
-                fld37, 'SwitchInfo', 'fld37'),
-            fld39: BuiltValueNullFieldError.checkNotNull(
-                fld39, 'SwitchInfo', 'fld39'),
-            fld41: BuiltValueNullFieldError.checkNotNull(
-                fld41, 'SwitchInfo', 'fld41'),
-            fld42: BuiltValueNullFieldError.checkNotNull(
-                fld42, 'SwitchInfo', 'fld42'),
-            fld45: BuiltValueNullFieldError.checkNotNull(
-                fld45, 'SwitchInfo', 'fld45'),
-            fld58: BuiltValueNullFieldError.checkNotNull(
-                fld58, 'SwitchInfo', 'fld58'),
-            fld59: BuiltValueNullFieldError.checkNotNull(
-                fld59, 'SwitchInfo', 'fld59'),
-            fld60: BuiltValueNullFieldError.checkNotNull(
-                fld60, 'SwitchInfo', 'fld60'),
-            fld61: BuiltValueNullFieldError.checkNotNull(
-                fld61, 'SwitchInfo', 'fld61'),
-            fld70:
-                BuiltValueNullFieldError.checkNotNull(fld70, 'SwitchInfo', 'fld70'));
+            mti: mti,
+            bitmap: bitmap,
+            fld3: fld3,
+            fld11: fld11,
+            fld12: fld12,
+            fld13: fld13,
+            fld24: fld24,
+            fld37: fld37,
+            fld39: fld39,
+            fld41: fld41,
+            fld42: fld42,
+            fld45: fld45,
+            fld58: fld58,
+            fld59: fld59,
+            fld60: fld60,
+            fld61: fld61,
+            fld70: fld70);
     replace(_$result);
     return _$result;
   }
