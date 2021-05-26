@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:built_value/serializer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fuelflex/config/text_strings.dart';
@@ -40,6 +41,7 @@ class ServiceProviders with ChangeNotifier {
 
 
   Future<ValidateUser> getValidateUser() async {
+   try{
     String _terminalNo = await getTerminalNo();
 
     RequestInfo _requestInfo = RequestInfo((b) => b
@@ -56,6 +58,13 @@ class ServiceProviders with ChangeNotifier {
    
 
     return validateUser;
+   } on DeserializationError {
+     throw FuelFlexApiException(message : "Deserrialization Error at ");
+   }on FuelFlexApiException catch(e){
+     throw FuelFlexApiException(statusCode : e.statusCode , message :e.message);
+   }catch(e){
+     throw FuelFlexApiException( message : "Couldn't fetch validate user response");
+   }
   }
 
   Future<String> serviceRequest(ReqInfo reqInfo) async {

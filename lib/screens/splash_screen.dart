@@ -71,8 +71,8 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.of(context).popAndPushNamed(TextStrings.appLoginScreenPath);
       });
     }).catchError((e) {
-      print(e);
-      _showDialog(e as String);
+      print(e.message);
+      _showDialog(e.message);
     });
   }
 
