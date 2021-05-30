@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:fuelflex/model/masterKey_info.dart';
 import 'package:fuelflex/model/merchant_info.dart';
 import 'package:fuelflex/model/req_info.dart';
@@ -9,7 +8,7 @@ import 'package:fuelflex/model/switch_info.dart';
 import 'package:fuelflex/model/terminal_info.dart';
 import 'package:fuelflex/model/validateUser_info.dart';
 
-class DataProvider with ChangeNotifier {
+class DataProvider  {
   MerchantInfo _merchantInfo;
   MerchantInfo get merchantInfo => _merchantInfo;
 
@@ -40,7 +39,6 @@ class DataProvider with ChangeNotifier {
     _switchInfo =
         SwitchInfo.fromJson(masterKeyInfo.respInfo.switchInfo.toJson());
     _terminalInfo = TerminalInfo.fromJson(masterKeyInfo.terminalInfo.toJson());
-    notifyListeners();
   }
 
   void setValidateUserInfo(ValidateUser validateUser) {
@@ -52,6 +50,5 @@ class DataProvider with ChangeNotifier {
     _switchInfo =
         SwitchInfo.fromJson(validateUser.respInfo.switchInfo.toJson());
     _terminalInfo = TerminalInfo.fromJson(validateUser.terminalInfo.toJson());
-    notifyListeners();
   }
 }

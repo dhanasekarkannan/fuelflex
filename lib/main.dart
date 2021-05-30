@@ -13,15 +13,19 @@ import 'screens/loginPage_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp( 
-    MultiProvider(
+  runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (_) => ServiceProviders(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => DataProvider(),
-      )
+      // ChangeNotifierProvider(
+      //   create: (_) => ServiceProviders(),
+      // ),
+      // ChangeNotifierProvider(
+      //   create: (_) => DataProvider(),
+      // ),
+      Provider<DataProvider>(create: (_) => DataProvider()),
+      ChangeNotifierProxyProvider<DataProvider, ServiceProviders>(
+                  create :(_)=> ServiceProviders(),
+
+          update: (_, data, __) => ServiceProviders()..update(data)),
     ],
     child: MyApp(),
   ));

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fuelflex/config/text_strings.dart';
-import 'package:fuelflex/model/masterKey_info.dart';
-import 'package:fuelflex/model/merchant_info.dart';
-import 'package:fuelflex/providers/data_provider.dart';
 import 'package:fuelflex/providers/service_providers.dart';
 import 'package:fuelflex/widgets/Background_widget.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +12,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  //
   bool _loading = true;
 
   @override
@@ -46,10 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void serviceCall() {
     Provider.of<ServiceProviders>(context, listen: false)
         .getMasterKeyInfo()
-        .then((masterKeyInfo) {
-      Provider.of<DataProvider>(context, listen: false)
-          .setMasterKeyInfo(masterKeyInfo);
-
+        .then((_) {
       setState(() {
         _loading = false;
       });
@@ -61,10 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }).then((_) {
       Provider.of<ServiceProviders>(context, listen: false)
           .getValidateUser()
-          .then((validateUser) {
-        Provider.of<DataProvider>(context, listen: false)
-            .setValidateUserInfo(validateUser);
-
+          .then((_) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Validator Request Success "),
         ));

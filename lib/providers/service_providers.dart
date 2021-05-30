@@ -11,10 +11,18 @@ import 'package:fuelflex/model/request_info.dart';
 import 'package:fuelflex/model/validateUser_info.dart';
 import 'package:http/http.dart' as http;
 
+import 'data_provider.dart';
+
 class ServiceProviders with ChangeNotifier {
   static const platform = const MethodChannel('com.example.fuelflex/terminal');
-
+   DataProvider data;
   static Uri _url = Uri.parse(TextStrings.serviceURL);
+
+  ServiceProviders();
+
+  void update(DataProvider dataProvider) {
+    data = dataProvider;
+  }
 
   Future<String> getTerminalNo() async {
     String terminalNo = await platform.invokeMethod("getTerminalNo");
@@ -22,7 +30,8 @@ class ServiceProviders with ChangeNotifier {
     return terminalNo;
   }
 
-  Future<MasterKeyInfo> getMasterKeyInfo() async {
+  Future<void> getMasterKeyInfo() async {
+    try{
     String _terminalNo = await getTerminalNo();
 
     RequestInfo _requestInfo = RequestInfo((b) => b
@@ -34,37 +43,44 @@ class ServiceProviders with ChangeNotifier {
     String masterKeyInfo = await serviceRequest(_reqInfo);
 
     MasterKeyInfo masterTest = MasterKeyInfo.fromJson(masterKeyInfo);
-    masterTest.toBuilder();
 
-    return masterTest;
+    data.setMasterKeyInfo(masterTest);
+    }on DeserializationError {
+      throw FuelFlexApiException(message: "Deserialization Error while setMasterKeyInfo");
+    } on FuelFlexApiException catch (e) {
+      throw FuelFlexApiException(statusCode: e.statusCode, message: e.message);
+    } catch (e) {
+      throw FuelFlexApiException(
+          message: "Couldn't fetch MasterKey info");
+    }
   }
 
+  Future<void> getValidateUser() async {
+    try {
+      String _terminalNo = await getTerminalNo();
 
-  Future<ValidateUser> getValidateUser() async {
-   try{
-    String _terminalNo = await getTerminalNo();
+      RequestInfo _requestInfo = RequestInfo((b) => b
+        ..requestType = TextStrings.validateUserRequestType
+        ..termSerialNum = "0821642299"
+        ..version = TextStrings.version
+        ..optr = "123456789012"
+        ..operatorType = "DEALER");
+      ReqInfo _reqInfo =
+          ReqInfo((b) => b..requestInfo = _requestInfo.toBuilder());
+      String validateUserResponse = await serviceRequest(_reqInfo);
 
-    RequestInfo _requestInfo = RequestInfo((b) => b
-      ..requestType = TextStrings.validateUserRequestType
-      ..termSerialNum = "0821642299"
-      ..version = TextStrings.version
-      ..optr = "123456789012"
-      ..operatorType = "DEALER"); 
-    ReqInfo _reqInfo =
-        ReqInfo((b) => b..requestInfo = _requestInfo.toBuilder());
-    String validateUserResponse = await serviceRequest(_reqInfo);
+      ValidateUser validateUser = ValidateUser.fromJson(validateUserResponse);
 
-    ValidateUser validateUser = ValidateUser.fromJson(validateUserResponse);
-   
-
-    return validateUser;
-   } on DeserializationError {
-     throw FuelFlexApiException(message : "Deserrialization Error at ");
-   }on FuelFlexApiException catch(e){
-     throw FuelFlexApiException(statusCode : e.statusCode , message :e.message);
-   }catch(e){
-     throw FuelFlexApiException( message : "Couldn't fetch validate user response");
-   }
+      data.setValidateUserInfo(validateUser);
+      
+    } on DeserializationError {
+      throw FuelFlexApiException(message: "Deserialization Error while setValidateUserInfo");
+    } on FuelFlexApiException catch (e) {
+      throw FuelFlexApiException(statusCode: e.statusCode, message: e.message);
+    } catch (e) {
+      throw FuelFlexApiException(
+          message: "Couldn't fetch validate user info");
+    }
   }
 
   Future<String> serviceRequest(ReqInfo reqInfo) async {
